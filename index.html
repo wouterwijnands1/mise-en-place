@@ -131,7 +131,35 @@
       overflow: hidden;
       min-width: 0;
     }
+.meta-bar {
+  display: flex;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, #fffefc, #f7f1e8);
+  flex-wrap: wrap;
+}
 
+.meta-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta-field label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.meta-field input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  font: inherit;
+  background: white;
+}
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -331,6 +359,17 @@
         </div>
       </div>
 
+<div class="meta-bar">
+  <div class="meta-field">
+    <label>Datum</label>
+    <input type="date" id="dateField">
+  </div>
+
+  <div class="meta-field">
+    <label>Naam</label>
+    <input type="text" id="nameField" placeholder="Naam invuller">
+  </div>
+</div>
       <div class="grid" id="listGrid"></div>
 
       <div class="footer-area">
@@ -556,7 +595,7 @@
     const listConfigs = [
       { id: 'warm', label: 'Warm M&P', title: 'Warm mise en place', hint: '1x tikken = X. 2x tikken = invoeren. Alles blijft bewaard op dit apparaat.', defaultData: warmDefaultData },
       { id: 'productie', label: 'Productielijst', title: 'Productielijst', hint: 'Placeholderlijst — later aan te vullen. Functionaliteit werkt al hetzelfde als de warme lijst.', defaultData: createPlaceholderData('Productielijst') },
-      { id: 'koud', label: 'MAP lijst koude kant', title: 'MAP lijst koude kant', hint: 'Placeholderlijst — later aan te vullen. Functionaliteit werkt al hetzelfde als de warme lijst.', defaultData: createPlaceholderData('MAP lijst koude kant') },
+      { id: 'koud', label: 'M&P lijst koude kant', title: 'M&P lijst koude kant', hint: 'Placeholderlijst — later aan te vullen. Functionaliteit werkt al hetzelfde als de warme lijst.', defaultData: createPlaceholderData('MAP lijst koude kant') },
       { id: 'bestel', label: 'Bestellijst', title: 'Bestellijst', hint: 'Placeholderlijst — later aan te vullen. Functionaliteit werkt al hetzelfde als de warme lijst.', defaultData: createPlaceholderData('Bestellijst') }
     ];
 
