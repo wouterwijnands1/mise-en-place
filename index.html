@@ -178,6 +178,40 @@
 
     .top-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
+.meta-bar {
+  display: flex;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, #fffefc, #f7f1e8);
+  flex-wrap: wrap;
+}
+
+.meta-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 170px;
+}
+
+.meta-field label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.meta-field input {
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  font: inherit;
+  background: white;
+  color: var(--text);
+}
+
+
     button {
       border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.08);
@@ -835,6 +869,17 @@
         </div>
       </div>
 
+      <div class="meta-bar" id="metaBar" style="display:none;">
+        <div class="meta-field">
+          <label for="dateField">Datum</label>
+          <input type="date" id="dateField">
+        </div>
+        <div class="meta-field">
+          <label for="nameField">Naam invuller</label>
+          <input type="text" id="nameField" placeholder="Naam invuller">
+        </div>
+      </div>
+
       <div class="grid" id="listGrid"></div>
 
       <div class="footer-area">
@@ -1418,10 +1463,10 @@ const koudDefaultData = {
 
     const listConfigs = [
       { id: 'warm', label: 'Warm M&P', title: 'Warm mise en place', hint: '1x tikken = X. 2x tikken = invoeren. Alles blijft bewaard op dit apparaat.', defaultData: warmDefaultData },
-      { id: 'koud', label: 'Koud M&P', title: 'Koud M&P', hint: 'Koude mise en place volgens het Excel-bestand. 1x tikken = X. 2x tikken = invoeren. Alles blijft bewaard op dit apparaat.', defaultData: koudDefaultData },
-      { id: 'productie', label: 'Productielijst', title: 'Productielijst', hint: 'Productielijst: 1x tikken = arceren t/m die dag. 2x tikken = X. Ingedrukt houden = invoeren.', defaultData: productieDefaultData },
-      { id: 'bestel', label: 'Bestellijst', title: 'Bestellijst', hint: 'Bestellijst: 1x tikken = X. 2x tikken = kies naam. Alles wissen blijft werken per weeklijst.', defaultData: bestelDefaultData },
-      { id: 'todo', label: 'Te doen lijst', title: 'Te doen lijst', hint: 'Groot tekstvak voor een korte te-doenlijst of aandachtspunten.', defaultData: todoDefaultData }
+      { id: 'koud', label: 'Koud M&P', title: 'Koud M&P', hint: '1x tikken = X. 2x tikken = invoeren. Alles blijft bewaard op dit apparaat.', defaultData: koudDefaultData },
+      { id: 'productie', label: 'Productielijst', title: 'Productielijst', hint: '1x tikken = arceren t/m die dag. 2x tikken = X. Ingedrukt houden = invoeren.', defaultData: productieDefaultData },
+      { id: 'bestel', label: 'Bestellijst', title: 'Bestellijst', hint: 'Bestellijst: 1x tikken = X. 2x tikken = kies naam.', defaultData: bestelDefaultData },
+      { id: 'todo', label: 'Te doen lijst', title: 'Te doen lijst', hint: 'selecteer text of stift functie voor een te-doenlijst', defaultData: todoDefaultData }
     ];
 
     let appState = loadAppState();
@@ -1461,6 +1506,8 @@ const koudDefaultData = {
             todoTitle: config.defaultData.todoTitle ? (saved?.todoTitle || config.defaultData.todoTitle) : undefined,
             todoText: config.defaultData.todoText ? (saved?.todoText || config.defaultData.todoText) : undefined,
             todoInk: config.defaultData.todoTitle ? (saved?.todoInk || '') : undefined,
+            metaDate: saved?.metaDate || '',
+            metaName: saved?.metaName || '',
             values: saved?.values || {},
             completed: saved?.completed || {},
             todoOnly: saved?.todoOnly || false,
@@ -1655,6 +1702,30 @@ function removeProductionRow(sectionIndex, rowIndex) {
   remapProductionCells(state, sectionIndex, rowIndex, 'removeRow');
   saveAppState();
   render();
+}
+
+
+    
+function listUsesMetaFields(listId) {
+  return ['warm', 'koud', 'productie'].includes(listId);
+}
+
+function updateMetaBar() {
+  const metaBar = document.getElementById('metaBar');
+  const dateField = document.getElementById('dateField');
+  const nameField = document.getElementById('nameField');
+  const state = getActiveState();
+
+  if (!listUsesMetaFields(activeListId)) {
+    metaBar.style.display = 'none';
+    dateField.value = '';
+    nameField.value = '';
+    return;
+  }
+
+  metaBar.style.display = 'flex';
+  dateField.value = state.metaDate || '';
+  nameField.value = state.metaName || '';
 }
 
 
@@ -2051,6 +2122,8 @@ function renderBestellijst() {
 function renderTodoLijst() {
       updateNav();
       updateHeader();
+      updateMetaBar();
+      updateMetaBar();
 
       const grid = document.getElementById('listGrid');
       grid.innerHTML = '';
@@ -2080,6 +2153,7 @@ function renderTodoLijst() {
       modeSelect.innerHTML = `
         <option value="text">Tekst</option>
         <option value="draw">Stift</option>
+
       `;
 
       const clearInkBtn = document.createElement('button');
@@ -2230,6 +2304,7 @@ function renderTodoLijst() {
     function renderProductie() {
       updateNav();
       updateHeader();
+      updateMetaBar();
 
       const grid = document.getElementById('listGrid');
       grid.innerHTML = '';
@@ -2428,6 +2503,7 @@ function renderTodoLijst() {
 
       updateNav();
       updateHeader();
+      updateMetaBar();
 
       const grid = document.getElementById('listGrid');
       grid.innerHTML = '';
@@ -2728,6 +2804,19 @@ function renderTodoLijst() {
       const { col, section } = el.dataset;
       state.columns[Number(col)].sections[Number(section)].title = el.textContent.trim();
     }
+
+
+document.getElementById('dateField').addEventListener('input', (event) => {
+  if (!listUsesMetaFields(activeListId)) return;
+  getActiveState().metaDate = event.target.value;
+  saveAppState();
+});
+
+document.getElementById('nameField').addEventListener('input', (event) => {
+  if (!listUsesMetaFields(activeListId)) return;
+  getActiveState().metaName = event.target.value;
+  saveAppState();
+});
 
     document.getElementById('notes').addEventListener('input', (event) => {
       getActiveState().notes = event.target.value;
