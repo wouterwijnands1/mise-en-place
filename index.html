@@ -117,10 +117,7 @@
     }
 
     .sidebar-foot {
-      padding: 10px 16px 18px;
-      color: rgba(255,255,255,0.62);
-      font-size: 0.84rem;
-      line-height: 1.45;
+      display: none;
     }
 
     .app {
@@ -131,35 +128,7 @@
       overflow: hidden;
       min-width: 0;
     }
-.meta-bar {
-  display: flex;
-  gap: 16px;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--line);
-  background: linear-gradient(180deg, #fffefc, #f7f1e8);
-  flex-wrap: wrap;
-}
 
-.meta-field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.meta-field label {
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.meta-field input {
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  font: inherit;
-  background: white;
-}
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -265,19 +234,86 @@
       background-image: linear-gradient(to right, rgba(184,150,104,0.12), rgba(184,150,104,0.04));
     }
 
-    .row { display: grid; grid-template-columns: minmax(0, 1fr) 92px; min-height: 56px; border-top: 1px solid #eee2d1; }
+    .section-title[contenteditable="true"] {
+      color: #fff !important;
+      background: linear-gradient(90deg, #171717 0%, #2b2621 100%) !important;
+    }
+
+    .section-subtitle[contenteditable="true"] {
+      color: #fff !important;
+      background: linear-gradient(90deg, #b89668 0%, #a98555 100%) !important;
+    }
+
+    .row { display: grid; grid-template-columns: minmax(0, 1fr) 76px; min-height: 34px; border-top: 1px solid #eee2d1; }
+
+    .row.with-minmax {
+      grid-template-columns: 56px 56px minmax(0, 1fr) 76px;
+    }
+
+    .koud-minmax-header {
+      display: grid;
+      grid-template-columns: 56px 56px minmax(0, 1fr) 76px;
+      border-top: 1px solid #eee2d1;
+      border-bottom: 1px solid #e3d3bf;
+      background: linear-gradient(180deg, #f6ecdd 0%, #ead9c3 100%);
+      min-height: 18px;
+    }
+
+    .koud-minmax-header > div {
+      padding: 2px 3px;
+      text-align: center;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.62rem;
+      line-height: 1;
+      color: #171717;
+      border-right: 1px solid #e3d3bf;
+    }
+
+    .koud-minmax-header > div:nth-child(3) {
+      text-align: left;
+      padding-left: 8px;
+    }
+
+    .koud-minmax-header > div:last-child {
+      border-right: 0;
+    }
+
+    .row-mm {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #171717;
+      border-right: 1px solid #eee2d1;
+      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(247,241,232,0.7));
+      padding: 4px 4px;
+    }
+
+    .row.note-row.with-minmax {
+      grid-template-columns: 64px 64px minmax(0, 1fr) 250px;
+    }
+
 
     .item-label {
-      padding: 15px 16px; line-height: 1.25; outline: none;
-      word-break: break-word; font-size: 1.02rem;
+      padding: 6px 8px;
+      line-height: 1.15;
+      outline: none;
+      word-break: break-word;
+      font-size: 0.92rem;
+      text-align: left;
+      justify-self: stretch;
+      align-self: center;
     }
 
     .value-cell {
       border-left: 1px solid #eee2d1;
       display: flex; align-items: center; justify-content: center;
       background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(247,241,232,0.7));
-      font-size: 1.3rem; font-weight: 700; user-select: none;
-      touch-action: manipulation; cursor: pointer; padding: 6px; text-align: center;
+      font-size: 1.05rem; font-weight: 700; user-select: none;
+      touch-action: manipulation; cursor: pointer; padding: 2px; text-align: center;
       transition: 0.15s ease;
     }
 
@@ -310,11 +346,446 @@
     .edit-button { min-width: 280px; background: #111; color: #fff; border: 1px solid #111; }
     .edit-button:hover { background: #232323; }
 
-    .edit-mode-indicator { text-align: center; color: #7b5b36; font-weight: 700; display: none; }
+    
+.edit-mode-indicator { text-align: center; color: #7b5b36; font-weight: 700; display: none; }
+
+    .section-edit-bar,
+    .production-edit-bar {
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+      padding: 4px 6px;
+      border-top: 1px solid #eadfce;
+      background: rgba(184,150,104,0.08);
+    }
+
+    .mini-btn {
+      border: 1px solid #d6c2a6;
+      background: #fffaf3;
+      color: #171717;
+      border-radius: 10px;
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .mini-btn.danger-mini {
+      background: #fff1f1;
+      border-color: #e0b4b4;
+    }
+
+    .row-controls,
+    .prod-row-controls {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
     .editing .edit-mode-indicator { display: block; }
     .editing .value-cell { opacity: 0.55; cursor: not-allowed; }
 
-    @media (max-width: 1180px) {
+    .row.completed .item-label,
+    .row.completed .value-cell {
+      text-decoration: line-through;
+      text-decoration-thickness: 2px;
+      text-decoration-color: rgba(23,23,23,0.72);
+    }
+
+    .item-label { cursor: pointer; }
+    .editing .item-label { cursor: text; }
+
+    
+    .production-board {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+      background: linear-gradient(180deg, rgba(184,150,104,0.06), transparent 18%);
+    }
+
+    .production-section {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #fffefc 0%, #fffaf3 100%);
+      box-shadow: 0 10px 24px rgba(17,17,17,0.06);
+    }
+
+    .production-title {
+      background: linear-gradient(90deg, #171717 0%, #2b2621 100%);
+      color: #fff;
+      padding: 13px 16px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .production-title[contenteditable="true"],
+    .prod-item-label[contenteditable="true"],
+    .prod-min[contenteditable="true"],
+    .prod-max[contenteditable="true"] {
+      box-shadow: inset 0 0 0 2px rgba(184,150,104,0.35);
+      background-image: linear-gradient(to right, rgba(184,150,104,0.12), rgba(184,150,104,0.04));
+    }
+
+    .production-title[contenteditable="true"] {
+      color: #fff !important;
+      background: linear-gradient(90deg, #171717 0%, #2b2621 100%) !important;
+    }
+
+    .production-table-wrap {
+      overflow-x: visible;
+    }
+
+    .production-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 0;
+      table-layout: fixed;
+    }
+
+    .production-table th,
+    .production-table td {
+      border-top: 1px solid #eee2d1;
+      padding: 10px 8px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .production-table thead th {
+      background: linear-gradient(180deg, #f6ecdd 0%, #ead9c3 100%);
+      color: #171717;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .production-table th.prod-item-head {
+      text-align: left;
+      width: 26%;
+    }
+
+    .prod-min, .prod-max {
+      width: 56px;
+      color: var(--muted);
+      font-weight: 700;
+      outline: none;
+      font-size: 0.9rem;
+      padding: 8px 6px !important;
+    }
+
+    .prod-item-label {
+      text-align: left;
+      padding: 10px 8px;
+      line-height: 1.15;
+      outline: none;
+      font-size: 0.94rem;
+      width: 26%;
+    }
+
+    .prod-day-cell {
+      min-width: 0;
+      width: 8%;
+      font-weight: 700;
+      user-select: none;
+      touch-action: manipulation;
+      cursor: pointer;
+      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(247,241,232,0.7));
+      transition: 0.15s ease;
+      font-size: 0.92rem;
+      padding: 8px 4px !important;
+    }
+
+    .prod-day-cell.has-value {
+      background: linear-gradient(180deg, #f7efe4 0%, #efe1cf 100%);
+      color: #111;
+    }
+
+    .prod-day-cell.stock-ok {
+      background: linear-gradient(180deg, rgba(255,194,73,0.95), rgba(239,170,39,0.88));
+    }
+
+    .prod-day-cell.has-x {
+      color: #111;
+      font-weight: 800;
+    }
+
+    .prod-day-cell.today-col,
+    .production-table thead th.today-col {
+      box-shadow: inset 0 0 0 2px rgba(184,150,104,0.28);
+    }
+
+    .prod-helper {
+      display: none;
+    }
+
+.bestel-board {
+  padding: 20px;
+  display: grid;
+  gap: 18px;
+  background: linear-gradient(180deg, rgba(184,150,104,0.06), transparent 18%);
+}
+
+.bestel-section {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #fffefc 0%, #fffaf3 100%);
+  box-shadow: 0 10px 24px rgba(17,17,17,0.06);
+}
+
+.bestel-title {
+  background: linear-gradient(90deg, #171717 0%, #2b2621 100%);
+  color: #fff;
+  padding: 13px 16px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.bestel-title[contenteditable="true"],
+.bestel-item-label[contenteditable="true"] {
+  box-shadow: inset 0 0 0 2px rgba(184,150,104,0.35);
+  background-image: linear-gradient(to right, rgba(184,150,104,0.12), rgba(184,150,104,0.04));
+}
+
+.bestel-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.bestel-table th,
+.bestel-table td {
+  border-top: 1px solid #eee2d1;
+  padding: 10px 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.bestel-table thead th {
+  background: linear-gradient(180deg, #f6ecdd 0%, #ead9c3 100%);
+  color: #171717;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+}
+
+.bestel-table th.bestel-item-head {
+  text-align: left;
+  width: 30%;
+}
+
+.bestel-item-label {
+  text-align: left;
+  padding: 10px 8px;
+  line-height: 1.15;
+  outline: none;
+  font-size: 0.94rem;
+  width: 30%;
+}
+
+.bestel-day-cell {
+  min-width: 0;
+  width: 10%;
+  font-weight: 700;
+  user-select: none;
+  touch-action: manipulation;
+  cursor: pointer;
+  background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(247,241,232,0.7));
+  transition: 0.15s ease;
+  font-size: 0.92rem;
+  padding: 8px 4px !important;
+}
+
+.bestel-day-cell.has-x,
+.bestel-day-cell.has-name {
+  background: linear-gradient(180deg, #f7efe4 0%, #efe1cf 100%);
+  color: #111;
+}
+
+
+    .row.note-row {
+      grid-template-columns: minmax(0, 1fr) 250px;
+      min-height: 46px;
+    }
+
+    .row.note-row .value-cell {
+      align-items: flex-start;
+      justify-content: flex-start;
+      white-space: pre-wrap;
+      line-height: 1.2;
+      font-size: 0.98rem;
+      padding: 10px;
+    }
+
+    
+    
+.todo-board {
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+  background: linear-gradient(180deg, rgba(184,150,104,0.06), transparent 18%);
+}
+
+.todo-wrap {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: linear-gradient(180deg, #fffefc 0%, #fffaf3 100%);
+  box-shadow: 0 10px 24px rgba(17,17,17,0.06);
+  overflow: hidden;
+}
+
+.todo-title {
+  margin: 0;
+  padding: 13px 16px;
+  background: linear-gradient(90deg, #171717 0%, #2b2621 100%);
+  color: #fff;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 800;
+  outline: none;
+}
+
+.todo-title[contenteditable="true"] {
+  color: #fff !important;
+  background: linear-gradient(90deg, #171717 0%, #2b2621 100%) !important;
+  box-shadow: inset 0 0 0 2px rgba(184,150,104,0.35);
+}
+
+.todo-textarea {
+  width: 100%;
+  min-height: 420px;
+  border: 0;
+  resize: vertical;
+  padding: 20px;
+  background: transparent;
+  color: var(--text);
+  outline: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+  line-height: 1.35;
+}
+
+.name-picker-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.38);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      padding: 16px;
+    }
+
+    .name-picker-overlay.open {
+      display: flex;
+    }
+
+    .name-picker {
+      width: min(360px, 100%);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .name-picker-head {
+      padding: 14px 16px;
+      background: linear-gradient(90deg, #171717 0%, #2b2621 100%);
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .name-picker-actions {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+    }
+
+    .name-picker-btn {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      padding: 14px 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .name-picker-btn.clear {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+
+    .todo-toolbar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fffaf3 0%, #f7efe4 100%);
+    }
+
+    .todo-toolbar button,
+    .todo-toolbar select {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .todo-draw-wrap {
+      position: relative;
+      min-height: 420px;
+      background: transparent;
+    }
+
+    .todo-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      pointer-events: none;
+    }
+
+    .todo-canvas.draw-enabled {
+      pointer-events: auto;
+    }
+
+    .todo-textarea.strike-mode {
+      text-decoration: line-through;
+      text-decoration-thickness: 3px;
+    }
+
+@media (max-width: 1180px) {
       .shell { grid-template-columns: 1fr; }
       .sidebar { position: static; }
       .nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -329,6 +800,10 @@
       .row { grid-template-columns: minmax(0, 1fr) 78px; }
       .item-label { padding: 12px; }
       .nav { grid-template-columns: 1fr; }
+      .row.note-row { grid-template-columns: minmax(0, 1fr) 180px; }
+      .prod-item-label { font-size: 0.88rem; }
+      .prod-day-cell { font-size: 0.82rem; padding: 6px 2px !important; }
+      .prod-min, .prod-max { width: 46px; font-size: 0.82rem; }
     }
   </style>
 </head>
@@ -355,21 +830,11 @@
           </div>
         </div>
         <div class="top-actions">
+          <button id="toggleTodoViewBtn" type="button">Toon alleen open taken</button>
           <button id="clearValuesBtn" class="danger" type="button">Alles wissen</button>
         </div>
       </div>
 
-<div class="meta-bar">
-  <div class="meta-field">
-    <label>Datum</label>
-    <input type="date" id="dateField">
-  </div>
-
-  <div class="meta-field">
-    <label>Naam</label>
-    <input type="text" id="nameField" placeholder="Naam invuller">
-  </div>
-</div>
       <div class="grid" id="listGrid"></div>
 
       <div class="footer-area">
@@ -388,7 +853,7 @@
   </div>
 
   <script>
-    const LISTS_STORAGE_KEY = 'bomenpark_multi_lists_v1';
+    const LISTS_STORAGE_KEY = 'bomenpark_multi_lists_v2';
 
     const warmDefaultData = {
       columns: [
@@ -397,63 +862,63 @@
             {
               title: '',
               rows: [
-                '1. checken van de reserveringen',
-                '2. rooster controleren'
+                { label: '1. checken van de reserveringen' },
+                { label: '2. rooster controleren' }
               ]
             },
             {
               title: 'Lunch klaarzetten',
               rows: [
-                'soepen/sauzen',
-                'eitjes bakken',
-                'spek bakken',
-                'kippendijen warm',
-                'pulled pork warm'
+                { label: 'soepen/sauzen' },
+                { label: 'eitjes bakken' },
+                { label: 'spek bakken' },
+                { label: 'kippendijen warm' },
+                { label: 'pulled pork warm' }
               ]
             },
             {
               title: 'Vlees',
               rows: [
-                'varkenshaas',
-                'lamsrack',
-                'hamburgers grillen'
+                { label: 'varkenshaas' },
+                { label: 'lamsrack' },
+                { label: 'hamburgers grillen' }
               ]
             },
             {
               title: 'Vis',
               rows: [
-                'zeebaars',
-                'gamba',
-                'tonijn grillen'
+                { label: 'zeebaars' },
+                { label: 'gamba' },
+                { label: 'tonijn grillen' }
               ]
             },
             {
               title: 'Groenten',
               rows: [
-                'bieslook snijden',
+                { label: 'bieslook snijden' },
                 "l'amuse tomaatjes",
-                'uien bakken',
-                'groenten',
-                'bosui snijden'
+                { label: 'uien bakken' },
+                { label: 'groenten' },
+                { label: 'bosui snijden' }
               ]
             },
             {
               title: 'Daglijst',
               rows: [
-                'Vangst van de dag: 8.15',
-                'Roast of the day: 5.15',
-                'Lunch van de dag:'
+                { label: 'Vangst van de dag: 8.15' },
+                { label: 'Roast of the day: 5.15' },
+                { label: 'Lunch van de dag:' }
               ]
             },
             {
               title: 'Uithalen vriezer',
               rows: [
-                'tomaten soep 4.6',
-                'kreeften bisque 2.3',
-                'seizoenssoep 4.5',
-                'varkenswang 8.15',
-                'lamsrack',
-                'pulled pork'
+                { min: '4', max: '6', label: 'tomaten soep' },
+                { min: '2', max: '3', label: 'kreeften bisque' },
+                { min: '4', max: '5', label: 'seizoenssoep' },
+                { min: '8', max: '15', label: 'varkenswang' },
+                { label: 'lamsrack' },
+                { label: 'pulled pork' }
               ]
             }
           ]
@@ -463,82 +928,441 @@
             {
               title: '',
               rows: [
-                '3. koelcel nalopen'
+                { label: '3. koelcel nalopen' }
               ]
             },
             {
               title: 'Sauzen',
               rows: [
-                'gerookte beurre blanc',
-                'rode port',
-                'bn- kalfsjus',
-                'butter-chicken',
-                'truffelroomsaus',
-                'peper-cognac saus',
-                'jdv afmaken',
-                'old Amsterdam'
+                { label: 'gerookte beurre blanc' },
+                { label: 'rode port' },
+                { label: 'bn- kalfsjus' },
+                { label: 'butter-chicken' },
+                { label: 'truffelroomsaus' },
+                { label: 'peper-cognac saus' },
+                { label: 'jdv afmaken' },
+                { label: 'old Amsterdam' }
               ]
             },
             {
               title: 'Overige',
               rows: [
-                'room',
-                'gamba snijden / garen',
-                'pasta tagliatella',
-                'appel caramel',
-                'seizoenssoep garnituren'
+                { label: 'room' },
+                { label: 'gamba snijden / garen' },
+                { label: 'pasta tagliatella' },
+                { label: 'appel caramel' },
+                { label: 'seizoenssoep garnituren' }
               ]
             },
             {
               title: 'Aanvullen',
               rows: [
-                'paddenstoelen',
-                'gerookte kipfilet',
-                'sla melange',
-                'tom/ komkommer',
-                'appel-geit',
-                'kerriemayonaise',
-                'basilicumolie',
-                'bramen',
-                'krokante kip',
-                'kalfsrendang',
-                'chili,kokos,ui'
+                { label: 'paddenstoelen' },
+                { label: 'gerookte kipfilet' },
+                { label: 'sla melange' },
+                { label: 'tom/ komkommer' },
+                { label: 'appel-geit' },
+                { label: 'kerriemayonaise' },
+                { label: 'basilicumolie' },
+                { label: 'bramen' },
+                { label: 'krokante kip' },
+                { label: 'kalfsrendang' },
+                { label: 'chili,kokos,ui' }
               ]
             },
             {
               title: 'Aanvullen voor vriezer',
               rows: [
-                'borrelgarnituur',
-                'kaashapjes',
-                'glutenvrij brood',
-                'frikandellen',
-                'risotto bitterballetjes',
-                'garnalenbitterballen',
-                'kreeftenboter',
-                'poffertjes'
+                { label: 'borrelgarnituur' },
+                { label: 'kaashapjes' },
+                { label: 'glutenvrij brood' },
+                { label: 'frikandellen' },
+                { label: 'risotto bitterballetjes' },
+                { label: 'garnalenbitterballen' },
+                { label: 'kreeftenboter' },
+                { label: 'poffertjes' }
               ]
             },
             {
               title: 'Saus:',
               rows: [
-                'zzewolf',
-                'diamanthaas'
+                { label: 'zzewolf' },
+                { label: 'diamanthaas' }
               ]
             },
             {
               title: 'Uithalen vriezer',
               rows: [
-                'zoete aardappelcreme',
-                'Iberico-truffel boter',
-                'kippendijen',
-                'bitterballen',
-                'kroketten'
+                { label: 'zoete aardappelcreme' },
+                { label: 'Iberico-truffel boter' },
+                { label: 'kippendijen' },
+                { label: 'bitterballen' },
+                { label: 'kroketten' }
               ]
             }
           ]
         }
       ],
       values: {},
+      notes: ''
+    };
+
+const bestelDefaultData = {
+  bestelSections: [
+    {
+      title: 'Bestellingen',
+      rows: [
+        { label: 'Sligro' },
+        { label: 'Lamers' },
+        { label: 'Heerkens' },
+        { label: 'BBQuality' },
+        { label: 'Olphen' },
+        { label: 'G&B' },
+        { label: 'Fromage' },
+        { label: 'Kreko' },
+        { label: 'Droom' },
+        { label: 'Boma' },
+        { label: 'Otelli' },
+        { label: 'Lars' },
+        { label: 'Christian, keuken' },
+        { label: 'Christian, bediening' }
+      ]
+    }
+  ],
+  bestelCells: {},
+  notes: ''
+};
+
+    
+
+const todoDefaultData = {
+  todoTitle: 'Te doen',
+  todoText: '',
+  notes: ''
+};
+
+const koudDefaultData = {
+      columns: [
+        {
+          sections: [
+            {
+              title: '',
+              rows: [
+                { label: 'checken van de reserveringen' },
+                { label: 'grote koelcel nalopen' }
+              ]
+            },
+            {
+              title: 'Lunch klaarzetten',
+              rows: [
+                { label: 'brood afbakken' },
+                { min: '35', max: '50', label: 'carpaccio drieluik' },
+                { min: '10', max: '20', label: 'drieluik bouwen' },
+                { min: '20', max: '30', label: 'rijst spoelen/afkoken' },
+                { min: '20', max: '30', label: 'avocado schoonmaken' },
+                { min: '1', max: '3', label: 'zz kk bol/maan' },
+                { min: '1', max: '3', label: 'zz wortel/radijs' },
+                { min: '1', max: '2', label: 'rode ui ringen' },
+                { min: '1', max: '3', label: 'tomaat snijden' },
+                { min: '1', max: '3', label: 'komkommer snijden' },
+                { min: '8', max: '1', label: 'brie snijden etc.' },
+                { min: '8', max: '16', label: 'appel geitenkaas' },
+                { min: '1', max: '30', label: 'gerookte zalm afwegen' },
+                { min: '1', max: '2', label: 'krokante kappertjes' }
+              ]
+            },
+            {
+              title: 'Flesjes aanvullen',
+              rows: [
+                { min: '1', max: '2', label: 'huisdressing' },
+                { min: '1', max: '2', label: 'wasabi mayo' },
+                { min: '1', max: '2', label: 'truffel mayo' },
+                { min: '1', max: '1', label: 'tomaten mayo' },
+                { min: '1', max: '2', label: 'gekon citrusmayo' },
+                { min: '1', max: '1', label: 'jus van pad-truffel' },
+                { min: '1', max: '2', label: 'chili-creme fraiche' },
+                { min: '1', max: '1', label: 'karnemelk B-N' },
+                { min: '1', max: '1', label: 'gel-vijgen' },
+                { min: '1', max: '1', label: 'yuzu-gel' }
+              ]
+            },
+            {
+              title: 'Overig',
+              rows: [
+                { min: '1', max: '2', label: 'macadamia crumble' },
+                { min: '1', max: '1', label: 'rijstkrokantje' },
+                { min: '1', max: '1', label: 'bagel krokantje' }
+              ]
+            },
+            {
+              title: 'Aantekeningen',
+              rows: [
+                { label: 'Lunch van de dag:' },
+                { label: 'Drie luik/ Proeverij:' },
+                { label: 'Seizoensdessert:' }
+              ]
+            },
+            {
+              title: 'Uithalen vriezer',
+              rows: [
+                { label: 'Mani-taartje' },
+                { label: 'Ijstaartje' },
+                { label: 'wakame' },
+                { label: 'carpaccio 40.70' },
+                { label: 'tempuraparels' },
+                { label: 'edamame' },
+                { label: 'carpaccio drieluik 35.50' },
+                { label: 'tonijn' }
+              ]
+            },
+            {
+              title: 'Volgende dag',
+              rows: [
+                { label: 'Alles goed aanvullen voor de volgende dag!!' }
+              ]
+            }
+          ]
+        },
+        {
+          sections: [
+            {
+              title: '',
+              rows: [
+                { label: 'apparaten aanzetten' }
+              ]
+            },
+            {
+              title: 'Diner M&P',
+              rows: [
+                { min: '2', max: '3', label: 'soja parels' },
+                { min: '1', max: '2', label: 'radijs partjes snijden' },
+                { min: '1', max: '2', label: 'zz paars/geel wortel' },
+                { min: '6', max: '10', label: 'zalm (Bertje)' },
+                { min: '1', max: '2', label: 'crème zwarte knoflook' },
+                { min: '1', max: '1', label: 'Pata Negra crumble' },
+                { min: '1', max: '1', label: 'haringkuit spuitzak' },
+                { min: '1', max: '1', label: 'witlof karameliseren' },
+                { min: '1', max: '1', label: 'paling trancheren' },
+                { min: '1', max: '1', label: 'portobello roosteren/mar' },
+                { min: '1', max: '1', label: 'bieten garen etc.' },
+                { min: '1', max: '2', label: 'tartaar eend' },
+                { min: '1', max: '1', label: 'oester pipetjes etc.' }
+              ]
+            },
+            {
+              title: 'Desserts',
+              rows: [
+                { label: 'THT CHECKEN!!!!' },
+                { min: '7', max: '14', label: 'kaas plateau snijden' },
+                { min: '5', max: '16', label: 'creme brulee garen' },
+                { min: '2', max: '4', label: 'witte chocolade crème' },
+                { min: '1', max: '1', label: 'gel' },
+                { min: '1', max: '2', label: 'chocolade schotsen' },
+                { min: '1', max: '2', label: 'honeycomb' }
+              ]
+            },
+            {
+              title: 'Snijden',
+              rows: [
+                { min: '2', max: '4', label: 'tonijn tataki bak' },
+                { min: '1', max: '3', label: 'pata negra bak' },
+                { min: '20', max: '40', label: 'gezouten roomboter' }
+              ]
+            }
+          ]
+        }
+      ],
+      values: {},
+      completed: {},
+      todoOnly: false,
+      notes: ''
+    };
+
+    const productieDefaultData = {
+      productionSections: [
+        {
+                "title": "Sauzen/dressings",
+                "rows": [
+                        {
+                                "min": "1",
+                                "max": "3",
+                                "label": "Huisdressing"
+                        },
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Wasabi mayo"
+                        },
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Truffel mayo"
+                        },
+                        {
+                                "min": "1",
+                                "max": "3",
+                                "label": "Kerrie mayo"
+                        },
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Sriracha mayo"
+                        },
+                        {
+                                "min": "1",
+                                "max": "3",
+                                "label": "Gekonfijte citrusmayo"
+                        },
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Bomenpark-dipper"
+                        },
+                        {
+                                "min": "0.5",
+                                "max": "1",
+                                "label": "Basilicum olie (10 bossen)"
+                        },
+                        {
+                                "min": "1",
+                                "max": "1",
+                                "label": "Soja (parels)"
+                        }
+                ]
+        },
+        {
+                "title": "Ketel",
+                "rows": [
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Jus de veau opzetten"
+                        },
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Tomatensoep"
+                        },
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Kreeften Bisque"
+                        },
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Seizoensoep"
+                        }
+                ]
+        },
+        {
+                "title": "koude/warme kant",
+                "rows": [
+                        {
+                                "min": "0.5",
+                                "max": "2",
+                                "label": "Zoetzuur"
+                        },
+                        {
+                                "min": "2",
+                                "max": "3",
+                                "label": "Olijven marineren"
+                        },
+                        {
+                                "min": "1kg",
+                                "max": "3kg",
+                                "label": "Pijnboompitten bruneren"
+                        },
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Crème van zwarte knoflook"
+                        },
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Panna cotta aardappel-pinda"
+                        },
+                        {
+                                "min": "4",
+                                "max": "8",
+                                "label": "Groentenboter"
+                        }
+                ]
+        },
+        {
+                "title": "Desserts",
+                "rows": [
+                        {
+                                "min": "1",
+                                "max": "3",
+                                "label": "Creme brulee maken"
+                        },
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Witte chocolade massa"
+                        },
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Crumble"
+                        }
+                ]
+        },
+        {
+                "title": "vriezer",
+                "rows": [
+                        {
+                                "min": "1",
+                                "max": "4",
+                                "label": "Wangentjes"
+                        },
+                        {
+                                "min": "1",
+                                "max": "3",
+                                "label": "Risotto bitterbal"
+                        },
+                        {
+                                "min": "1",
+                                "max": "3",
+                                "label": "Pataboter"
+                        }
+                ]
+        },
+        {
+                "title": "Overig",
+                "rows": [
+                        {
+                                "min": "1",
+                                "max": "2",
+                                "label": "Borrelgarnituur"
+                        },
+                        {
+                                "min": "1",
+                                "max": "1",
+                                "label": "Kaashapjes"
+                        },
+                        {
+                                "min": "evt.",
+                                "max": "1",
+                                "label": "Risotto"
+                        }
+                ]
+        },
+        {
+                "title": "Notities",
+                "rows": [
+                        {
+                                "min": "",
+                                "max": "",
+                                "label": "Honeycomb 1x"
+                        }
+                ]
+        }
+],
+      productionCells: {},
+      todoOnly: false,
       notes: ''
     };
 
@@ -594,9 +1418,10 @@
 
     const listConfigs = [
       { id: 'warm', label: 'Warm M&P', title: 'Warm mise en place', hint: '1x tikken = X. 2x tikken = invoeren. Alles blijft bewaard op dit apparaat.', defaultData: warmDefaultData },
-      { id: 'productie', label: 'Productielijst', title: 'Productielijst', hint: 'Placeholderlijst — later aan te vullen. Functionaliteit werkt al hetzelfde als de warme lijst.', defaultData: createPlaceholderData('Productielijst') },
-      { id: 'koud', label: 'M&P lijst koude kant', title: 'M&P lijst koude kant', hint: 'Placeholderlijst — later aan te vullen. Functionaliteit werkt al hetzelfde als de warme lijst.', defaultData: createPlaceholderData('MAP lijst koude kant') },
-      { id: 'bestel', label: 'Bestellijst', title: 'Bestellijst', hint: 'Placeholderlijst — later aan te vullen. Functionaliteit werkt al hetzelfde als de warme lijst.', defaultData: createPlaceholderData('Bestellijst') }
+      { id: 'koud', label: 'Koud M&P', title: 'Koud M&P', hint: 'Koude mise en place volgens het Excel-bestand. 1x tikken = X. 2x tikken = invoeren. Alles blijft bewaard op dit apparaat.', defaultData: koudDefaultData },
+      { id: 'productie', label: 'Productielijst', title: 'Productielijst', hint: 'Productielijst: 1x tikken = arceren t/m die dag. 2x tikken = X. Ingedrukt houden = invoeren.', defaultData: productieDefaultData },
+      { id: 'bestel', label: 'Bestellijst', title: 'Bestellijst', hint: 'Bestellijst: 1x tikken = X. 2x tikken = kies naam. Alles wissen blijft werken per weeklijst.', defaultData: bestelDefaultData },
+      { id: 'todo', label: 'Te doen lijst', title: 'Te doen lijst', hint: 'Groot tekstvak voor een korte te-doenlijst of aandachtspunten.', defaultData: todoDefaultData }
     ];
 
     let appState = loadAppState();
@@ -619,9 +1444,26 @@
 
         listConfigs.forEach(config => {
           const saved = parsed.lists?.[config.id];
+          const savedColumns = saved?.columns;
+          const hasOldKoudPlaceholder = config.id === 'koud' && (
+            JSON.stringify(savedColumns || []).includes('placeholder') ||
+            typeof savedColumns?.[0]?.sections?.[1]?.rows?.[0] === 'string'
+          );
+          const hasOldWarmMinMaxMissing = config.id === 'warm';
+          const hasOldProductiePlaceholder = config.id === 'productie' && (!saved?.productionSections || JSON.stringify(savedColumns || []).includes('placeholder'));
+          const hasOldBestelPlaceholder = config.id === 'bestel' && (!saved?.bestelSections || JSON.stringify(savedColumns || []).includes('placeholder'));
           lists[config.id] = {
-            columns: saved?.columns || clone(config.defaultData.columns),
+            columns: config.defaultData.columns ? ((!savedColumns || hasOldKoudPlaceholder || hasOldWarmMinMaxMissing) ? clone(config.defaultData.columns) : savedColumns) : undefined,
+            productionSections: config.defaultData.productionSections ? (hasOldProductiePlaceholder ? clone(config.defaultData.productionSections) : (saved?.productionSections || clone(config.defaultData.productionSections))) : undefined,
+            productionCells: saved?.productionCells || {},
+            bestelSections: config.defaultData.bestelSections ? (hasOldBestelPlaceholder ? clone(config.defaultData.bestelSections) : (saved?.bestelSections || clone(config.defaultData.bestelSections))) : undefined,
+            bestelCells: saved?.bestelCells || {},
+            todoTitle: config.defaultData.todoTitle ? (saved?.todoTitle || config.defaultData.todoTitle) : undefined,
+            todoText: config.defaultData.todoText ? (saved?.todoText || config.defaultData.todoText) : undefined,
+            todoInk: config.defaultData.todoTitle ? (saved?.todoInk || '') : undefined,
             values: saved?.values || {},
+            completed: saved?.completed || {},
+            todoOnly: saved?.todoOnly || false,
             notes: saved?.notes || ''
           };
         });
@@ -667,21 +1509,923 @@
       document.getElementById('pageHint').textContent = config.hint;
     }
 
+    
+function makeDefaultGenericRow(section) {
+  const hasObjects = section.rows.some(entry => typeof entry === 'object' && entry !== null);
+  return hasObjects ? { min: '', max: '', label: 'Nieuwe rij' } : 'Nieuwe rij';
+}
+
+function remapGenericKeyObject(source, colIndex, sectionIndex, rowIndex, action) {
+  const next = {};
+  Object.entries(source || {}).forEach(([key, value]) => {
+    let [c, s, r] = key.split('-').map(Number);
+    if (c !== colIndex) {
+      next[key] = value;
+      return;
+    }
+
+    if (action === 'addRow') {
+      if (s === sectionIndex && r > rowIndex) r += 1;
+    } else if (action === 'removeRow') {
+      if (s === sectionIndex && r === rowIndex) return;
+      if (s === sectionIndex && r > rowIndex) r -= 1;
+    } else if (action === 'addSection') {
+      if (s > sectionIndex) s += 1;
+    } else if (action === 'removeSection') {
+      if (s === sectionIndex) return;
+      if (s > sectionIndex) s -= 1;
+    }
+
+    next[`${c}-${s}-${r}`] = value;
+  });
+  return next;
+}
+
+function addGenericSection(colIndex, afterSectionIndex) {
+  const state = getActiveState();
+  const column = state.columns[colIndex];
+  const template = column.sections[Math.max(0, afterSectionIndex)] || { title: '', rows: ['Nieuwe rij'] };
+  const newSection = {
+    title: 'Nieuwe kop',
+    rows: [makeDefaultGenericRow(template)]
+  };
+  column.sections.splice(afterSectionIndex + 1, 0, newSection);
+  state.values = remapGenericKeyObject(state.values, colIndex, afterSectionIndex, null, 'addSection');
+  state.completed = remapGenericKeyObject(state.completed, colIndex, afterSectionIndex, null, 'addSection');
+  saveAppState();
+  render();
+}
+
+function removeGenericSection(colIndex, sectionIndex) {
+  const state = getActiveState();
+  const column = state.columns[colIndex];
+  if (!column.sections[sectionIndex]) return;
+  column.sections.splice(sectionIndex, 1);
+  if (!column.sections.length) {
+    column.sections.push({ title: 'Nieuwe kop', rows: ['Nieuwe rij'] });
+  }
+  state.values = remapGenericKeyObject(state.values, colIndex, sectionIndex, null, 'removeSection');
+  state.completed = remapGenericKeyObject(state.completed, colIndex, sectionIndex, null, 'removeSection');
+  saveAppState();
+  render();
+}
+
+function addGenericRow(colIndex, sectionIndex, afterRowIndex) {
+  const state = getActiveState();
+  const section = state.columns[colIndex].sections[sectionIndex];
+  section.rows.splice(afterRowIndex + 1, 0, makeDefaultGenericRow(section));
+  state.values = remapGenericKeyObject(state.values, colIndex, sectionIndex, afterRowIndex, 'addRow');
+  state.completed = remapGenericKeyObject(state.completed, colIndex, sectionIndex, afterRowIndex, 'addRow');
+  saveAppState();
+  render();
+}
+
+function removeGenericRow(colIndex, sectionIndex, rowIndex) {
+  const state = getActiveState();
+  const section = state.columns[colIndex].sections[sectionIndex];
+  if (!section.rows[rowIndex]) return;
+  section.rows.splice(rowIndex, 1);
+  if (!section.rows.length) {
+    section.rows.push(makeDefaultGenericRow(section));
+  }
+  state.values = remapGenericKeyObject(state.values, colIndex, sectionIndex, rowIndex, 'removeRow');
+  state.completed = remapGenericKeyObject(state.completed, colIndex, sectionIndex, rowIndex, 'removeRow');
+  saveAppState();
+  render();
+}
+
+function remapProductionCells(state, sectionIndex, rowIndex, action) {
+  const next = {};
+  Object.entries(state.productionCells || {}).forEach(([key, value]) => {
+    let [s, r, d] = key.split('-').map(Number);
+
+    if (action === 'addSection') {
+      if (s > sectionIndex) s += 1;
+    } else if (action === 'removeSection') {
+      if (s === sectionIndex) return;
+      if (s > sectionIndex) s -= 1;
+    } else if (action === 'addRow') {
+      if (s === sectionIndex && r > rowIndex) r += 1;
+    } else if (action === 'removeRow') {
+      if (s === sectionIndex && r === rowIndex) return;
+      if (s === sectionIndex && r > rowIndex) r -= 1;
+    }
+
+    next[`${s}-${r}-${d}`] = value;
+  });
+  state.productionCells = next;
+}
+
+function addProductionSection(afterSectionIndex) {
+  const state = getActiveState();
+  state.productionSections.splice(afterSectionIndex + 1, 0, {
+    title: 'Nieuwe kop',
+    rows: [{ min: '', max: '', label: 'Nieuwe rij' }]
+  });
+  remapProductionCells(state, afterSectionIndex, null, 'addSection');
+  saveAppState();
+  render();
+}
+
+function removeProductionSection(sectionIndex) {
+  const state = getActiveState();
+  state.productionSections.splice(sectionIndex, 1);
+  if (!state.productionSections.length) {
+    state.productionSections.push({ title: 'Nieuwe kop', rows: [{ min: '', max: '', label: 'Nieuwe rij' }] });
+  }
+  remapProductionCells(state, sectionIndex, null, 'removeSection');
+  saveAppState();
+  render();
+}
+
+function addProductionRow(sectionIndex, afterRowIndex) {
+  const state = getActiveState();
+  state.productionSections[sectionIndex].rows.splice(afterRowIndex + 1, 0, { min: '', max: '', label: 'Nieuwe rij' });
+  remapProductionCells(state, sectionIndex, afterRowIndex, 'addRow');
+  saveAppState();
+  render();
+}
+
+function removeProductionRow(sectionIndex, rowIndex) {
+  const state = getActiveState();
+  state.productionSections[sectionIndex].rows.splice(rowIndex, 1);
+  if (!state.productionSections[sectionIndex].rows.length) {
+    state.productionSections[sectionIndex].rows.push({ min: '', max: '', label: 'Nieuwe rij' });
+  }
+  remapProductionCells(state, sectionIndex, rowIndex, 'removeRow');
+  saveAppState();
+  render();
+}
+
+
     function updateButton() {
       const btn = document.getElementById('editToggle');
-      const app = document.getElementById('app');
+      const activeId = activeListId || listConfigs[0].id;
+
       if (isEditing) {
         btn.textContent = 'Opslaan';
-        btn.title = 'Sla de aangepaste lijst op';
-        app.classList.add('editing');
+        return;
+      }
+
+      if (activeId === 'productie') {
+        btn.textContent = 'Dubbelklik om productielijst te bewerken';
+      } else if (activeId === 'bestel') {
+        btn.textContent = 'Dubbelklik om bestellijst te bewerken';
+      } else if (activeId === 'todo') {
+        btn.textContent = 'Dubbelklik om te-doenlijst te bewerken';
       } else {
-        btn.textContent = 'Dubbelklik om lijst te bewerken';
-        btn.title = 'Dubbelklik om de lijsttekst te kunnen aanpassen.';
-        app.classList.remove('editing');
+        btn.textContent = 'Dubbelklik om de lijsttekst te bewerken';
       }
     }
 
+    function isRowDone(state, rowKey) {
+      const value = String(state.values?.[rowKey] || '').trim().toUpperCase();
+      return value === 'X';
+    }
+
+    function updateTodoButton() {
+      const btn = document.getElementById('toggleTodoViewBtn');
+      if (!btn) return;
+      const activeId = activeListId || listConfigs[0].id;
+      const state = getActiveState();
+
+      if (activeId === 'bestel' || activeId === 'todo') {
+        btn.style.display = 'none';
+        return;
+      }
+
+      btn.style.display = '';
+      if (activeId === 'productie') {
+        btn.textContent = state.todoOnly ? 'Toon complete week' : 'Verberg gearceerde vakken';
+        return;
+      }
+
+      btn.textContent = state.todoOnly ? 'Toon complete lijst' : 'Toon alleen nog te maken';
+    }
+
+
+    const PROD_DAYS = ['MA', 'DI', 'WO', 'DO', 'VR', 'ZA', 'ZO'];
+
+    function getTodayDayIndex() {
+      const jsDay = new Date().getDay(); // 0=zo,1=ma
+      return jsDay === 0 ? 6 : jsDay - 1;
+    }
+
+    function parseProductionKey(key) {
+      const [sectionIndex, rowIndex, dayIndex] = key.split('-').map(Number);
+      return { sectionIndex, rowIndex, dayIndex };
+    }
+
+    function getProductionCell(state, key) {
+      const raw = state.productionCells?.[key];
+      if (!raw) return { value: '', stock: false, x: false };
+      if ('stock' in raw || 'x' in raw) {
+        return {
+          value: raw.value || '',
+          stock: !!raw.stock,
+          x: !!raw.x
+        };
+      }
+      return {
+        value: raw.value || '',
+        stock: raw.mark === 'stock',
+        x: raw.mark === 'x'
+      };
+    }
+
+    function setProductionCell(state, key, cell) {
+      const normalized = {
+        value: String(cell.value || '').trim(),
+        stock: !!cell.stock,
+        x: !!cell.x
+      };
+      if (!normalized.value && !normalized.stock && !normalized.x) {
+        delete state.productionCells[key];
+        return;
+      }
+      state.productionCells[key] = normalized;
+    }
+
+    function isProductionCellDone(cell) {
+      return !!cell.stock;
+    }
+
+    function setProductionStockUntil(state, sectionIndex, rowIndex, dayIndex) {
+      let sameSelection = true;
+      for (let d = 0; d < PROD_DAYS.length; d++) {
+        const cell = getProductionCell(state, `${sectionIndex}-${rowIndex}-${d}`);
+        const shouldBeStock = d <= dayIndex;
+        if (!!cell.stock !== shouldBeStock) {
+          sameSelection = false;
+          break;
+        }
+      }
+
+      for (let d = 0; d < PROD_DAYS.length; d++) {
+        const key = `${sectionIndex}-${rowIndex}-${d}`;
+        const cell = getProductionCell(state, key);
+        const nextCell = { ...cell };
+        nextCell.stock = sameSelection ? false : d <= dayIndex;
+        setProductionCell(state, key, nextCell);
+      }
+    }
+
+    function toggleProductionX(cellEl) {
+      const state = getActiveState();
+      const key = cellEl.dataset.key;
+      const current = getProductionCell(state, key);
+      setProductionCell(state, key, { ...current, x: !current.x, value: current.value || '' });
+      saveAppState();
+      const namePickerOverlay = document.getElementById('namePickerOverlay');
+    namePickerOverlay.addEventListener('click', (event) => {
+      if (event.target === namePickerOverlay) closeNamePicker();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeNamePicker();
+    });
+
+    render();
+    }
+
+    function openProductionCellText(cellEl) {
+      const state = getActiveState();
+      const key = cellEl.dataset.key;
+      const current = getProductionCell(state, key);
+      const input = prompt('Voer tekst of een notitie in voor dit vak:', current.value || '');
+      if (input === null) return;
+      const nextValue = input.trim();
+      setProductionCell(state, key, {
+        value: nextValue,
+        stock: nextValue ? false : current.stock,
+        x: nextValue ? false : current.x
+      });
+      saveAppState();
+      render();
+    }
+
+    function onProductionCellPointerDown(event) {
+      if (isEditing) return;
+      const cell = event.currentTarget;
+      cell._pressTriggered = false;
+      clearTimeout(cell._pressTimer);
+      cell._pressTimer = setTimeout(() => {
+        cell._pressTriggered = true;
+        openProductionCellText(cell);
+      }, 500);
+    }
+
+    function onProductionCellPointerUp(event) {
+      if (isEditing) return;
+      const cell = event.currentTarget;
+      clearTimeout(cell._pressTimer);
+
+      if (cell._pressTriggered) {
+        cell._pressTriggered = false;
+        cell._tapCount = 0;
+        clearTimeout(cell._tapTimer);
+        return;
+      }
+
+      cell._tapCount = (cell._tapCount || 0) + 1;
+      clearTimeout(cell._tapTimer);
+
+      cell._tapTimer = setTimeout(() => {
+        const taps = cell._tapCount || 0;
+        cell._tapCount = 0;
+
+        if (taps >= 2) {
+          toggleProductionX(cell);
+          return;
+        }
+
+        const state = getActiveState();
+        const { sectionIndex, rowIndex, dayIndex } = parseProductionKey(cell.dataset.key);
+        setProductionStockUntil(state, sectionIndex, rowIndex, dayIndex);
+        saveAppState();
+        render();
+      }, 320);
+    }
+
+    function onProductionCellPointerCancel(event) {
+      const cell = event.currentTarget;
+      clearTimeout(cell._pressTimer);
+    }
+
+    function onProductionTitleEdit(event) {
+      const el = event.currentTarget;
+      const state = getActiveState();
+      state.productionSections[Number(el.dataset.section)].title = el.textContent.trim() || ' ';
+    }
+
+    function onProductionRowTextEdit(event) {
+      const el = event.currentTarget;
+      const state = getActiveState();
+      const row = state.productionSections[Number(el.dataset.section)].rows[Number(el.dataset.row)];
+      row[el.dataset.field] = el.textContent.trim() || ' ';
+    }
+
+    
+const BESTEL_DAYS = ['MA', 'DI', 'WO', 'DO', 'VR', 'ZA', 'ZO'];
+const BESTEL_NAMEN = ['Bern', 'Twan', 'Ruben', 'Johan'];
+
+function getBestelCell(state, key) {
+  const raw = state.bestelCells?.[key];
+  if (!raw) return { value: '' };
+  return { value: String(raw.value || '').trim() };
+}
+
+function setBestelCell(state, key, cell) {
+  const normalized = { value: String(cell.value || '').trim() };
+  if (!normalized.value) {
+    delete state.bestelCells[key];
+    return;
+  }
+  state.bestelCells[key] = normalized;
+}
+
+function toggleBestelX(cellEl) {
+  const state = getActiveState();
+  const key = cellEl.dataset.key;
+  const current = getBestelCell(state, key);
+  const next = current.value === 'X' ? '' : 'X';
+  setBestelCell(state, key, { value: next });
+  saveAppState();
+  render();
+}
+
+function chooseBestelNaam(cellEl) {
+  const state = getActiveState();
+  const key = cellEl.dataset.key;
+  const current = getBestelCell(state, key).value || '';
+  const choice = window.prompt(
+    'Kies een naam: Bern, Twan, Ruben of Johan.\nLaat leeg om te wissen.',
+    current === 'X' ? '' : current
+  );
+  if (choice === null) return;
+  const cleaned = choice.trim();
+  if (!cleaned) {
+    setBestelCell(state, key, { value: '' });
+    saveAppState();
+    render();
+    return;
+  }
+  const match = BESTEL_NAMEN.find(name => name.toLowerCase() === cleaned.toLowerCase());
+  if (!match) {
+    window.alert('Kies één van deze namen: Bern, Twan, Ruben, Johan.');
+    return;
+  }
+  setBestelCell(state, key, { value: match });
+  saveAppState();
+  render();
+}
+
+function onBestelCellClick(event) {
+  if (isEditing) return;
+  toggleBestelX(event.currentTarget);
+}
+
+function onBestelCellDoubleClick(event) {
+  if (isEditing) return;
+  chooseBestelNaam(event.currentTarget);
+}
+
+function onBestelCellTouchEnd(event) {
+  if (isEditing) return;
+  event.preventDefault();
+  const cell = event.currentTarget;
+  const now = Date.now();
+  const lastTap = Number(cell.dataset.lastTap || 0);
+
+  if (cell._singleTapTimer && now - lastTap < 350) {
+    clearTimeout(cell._singleTapTimer);
+    cell._singleTapTimer = null;
+    cell.dataset.lastTap = '0';
+    openNamePicker(cell);
+    return;
+  }
+
+  cell.dataset.lastTap = String(now);
+  cell._singleTapTimer = setTimeout(() => {
+    onBestelCellClick({ currentTarget: cell });
+    cell._singleTapTimer = null;
+    cell.dataset.lastTap = '0';
+  }, 320);
+}
+
+function onBestelTitleEdit(event) {
+  const { section } = event.currentTarget.dataset;
+  getActiveState().bestelSections[Number(section)].title = event.currentTarget.textContent.trim() || ' ';
+  saveAppState();
+}
+
+function onBestelRowTextEdit(event) {
+  const { section, row } = event.currentTarget.dataset;
+  getActiveState().bestelSections[Number(section)].rows[Number(row)].label = event.currentTarget.textContent.trim() || ' ';
+  saveAppState();
+}
+
+function renderBestellijst() {
+  updateNav();
+  updateHeader();
+
+  const grid = document.getElementById('listGrid');
+  grid.innerHTML = '';
+  const state = getActiveState();
+  const board = document.createElement('div');
+  board.className = 'bestel-board';
+
+  state.bestelSections.forEach((section, sectionIndex) => {
+    const wrap = document.createElement('section');
+    wrap.className = 'bestel-section';
+
+    const title = document.createElement('div');
+    title.className = 'bestel-title';
+    title.textContent = section.title || ' ';
+    title.dataset.section = sectionIndex;
+    title.contentEditable = isEditing ? 'true' : 'false';
+    title.spellcheck = false;
+    title.addEventListener('input', onBestelTitleEdit);
+    wrap.appendChild(title);
+
+    const table = document.createElement('table');
+    table.className = 'bestel-table';
+
+    const thead = document.createElement('thead');
+    const headRow = document.createElement('tr');
+    ['Bestelling', ...BESTEL_DAYS].forEach((label, idx) => {
+      const th = document.createElement('th');
+      th.textContent = label;
+      if (idx === 0) th.classList.add('bestel-item-head');
+      headRow.appendChild(th);
+    });
+    thead.appendChild(headRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    section.rows.forEach((row, rowIndex) => {
+      const tr = document.createElement('tr');
+
+      const tdLabel = document.createElement('td');
+      tdLabel.className = 'bestel-item-label';
+      tdLabel.textContent = row.label || '';
+      tdLabel.dataset.section = sectionIndex;
+      tdLabel.dataset.row = rowIndex;
+      tdLabel.contentEditable = isEditing ? 'true' : 'false';
+      tdLabel.spellcheck = false;
+      tdLabel.addEventListener('input', onBestelRowTextEdit);
+      tr.appendChild(tdLabel);
+
+      BESTEL_DAYS.forEach((day, dayIndex) => {
+        const td = document.createElement('td');
+        td.className = 'bestel-day-cell';
+        const key = `${sectionIndex}-${rowIndex}-${dayIndex}`;
+        td.dataset.key = key;
+        const cellState = getBestelCell(state, key);
+        td.textContent = cellState.value || '';
+        if (cellState.value === 'X') td.classList.add('has-x');
+        if (cellState.value && cellState.value !== 'X') td.classList.add('has-name');
+        td.addEventListener('click', onBestelCellClick);
+        td.addEventListener('dblclick', onBestelCellDoubleClick);
+        td.addEventListener('touchend', onBestelCellTouchEnd, { passive: false });
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    board.appendChild(wrap);
+  });
+
+  grid.appendChild(board);
+
+  const notes = document.getElementById('notes');
+  notes.value = state.notes || '';
+  updateButton();
+  updateTodoButton();
+}
+
+
+    
+function renderTodoLijst() {
+      updateNav();
+      updateHeader();
+
+      const grid = document.getElementById('listGrid');
+      grid.innerHTML = '';
+      const state = getActiveState();
+
+      const board = document.createElement('div');
+      board.className = 'todo-board';
+
+      const wrap = document.createElement('div');
+      wrap.className = 'todo-wrap';
+
+      const title = document.createElement('div');
+      title.className = 'todo-title';
+      title.textContent = state.todoTitle || 'Te doen';
+      title.contentEditable = isEditing ? 'true' : 'false';
+      title.spellcheck = false;
+      title.addEventListener('input', (event) => {
+        state.todoTitle = event.currentTarget.textContent.trim() || 'Te doen';
+        saveAppState();
+      });
+      wrap.appendChild(title);
+
+      const toolbar = document.createElement('div');
+      toolbar.className = 'todo-toolbar';
+
+      const modeSelect = document.createElement('select');
+      modeSelect.innerHTML = `
+        <option value="text">Tekst</option>
+        <option value="draw">Stift</option>
+      `;
+
+      const clearInkBtn = document.createElement('button');
+      clearInkBtn.type = 'button';
+      clearInkBtn.textContent = 'Wis tekening';
+
+      toolbar.appendChild(modeSelect);
+      toolbar.appendChild(clearInkBtn);
+      wrap.appendChild(toolbar);
+
+      const drawWrap = document.createElement('div');
+      drawWrap.className = 'todo-draw-wrap';
+
+      const area = document.createElement('textarea');
+      area.className = 'todo-textarea';
+      area.placeholder = 'Schrijf hier een te-doenlijst...';
+      area.value = state.todoText || '';
+      area.addEventListener('input', (event) => {
+        state.todoText = event.target.value;
+        saveAppState();
+      });
+      drawWrap.appendChild(area);
+
+      const canvas = document.createElement('canvas');
+      canvas.className = 'todo-canvas';
+      drawWrap.appendChild(canvas);
+
+      wrap.appendChild(drawWrap);
+      board.appendChild(wrap);
+      grid.appendChild(board);
+
+      const resizeCanvas = () => {
+        const rect = drawWrap.getBoundingClientRect();
+        canvas.width = Math.max(1, Math.floor(rect.width * devicePixelRatio));
+        canvas.height = Math.max(1, Math.floor(rect.height * devicePixelRatio));
+        canvas.style.width = rect.width + 'px';
+        canvas.style.height = rect.height + 'px';
+        const ctx = canvas.getContext('2d');
+        ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        redrawInk();
+      };
+
+      const redrawInk = () => {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let strokes = [];
+        try { strokes = JSON.parse(state.todoInk || '[]'); } catch (e) {}
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = '#171717';
+        ctx.lineWidth = 3;
+        strokes.forEach(stroke => {
+          if (!stroke.points || !stroke.points.length) return;
+          ctx.beginPath();
+          ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
+          stroke.points.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+          ctx.stroke();
+        });
+      };
+
+      resizeCanvas();
+      window.requestAnimationFrame(resizeCanvas);
+
+      let currentMode = 'text';
+      let drawing = false;
+      let currentStroke = null;
+
+      const applyMode = () => {
+        area.readOnly = currentMode !== 'text';
+        canvas.classList.toggle('draw-enabled', currentMode === 'draw' || currentMode === 'strike');
+        area.classList.toggle('strike-mode', currentMode === 'strike');
+      };
+
+      modeSelect.addEventListener('change', () => {
+        currentMode = modeSelect.value;
+        applyMode();
+      });
+
+      clearInkBtn.addEventListener('click', () => {
+        state.todoInk = '';
+        saveAppState();
+        redrawInk();
+      });
+
+      const getPoint = (event) => {
+        const rect = canvas.getBoundingClientRect();
+        return {
+          x: event.clientX - rect.left,
+          y: event.clientY - rect.top
+        };
+      };
+
+      canvas.addEventListener('pointerdown', (event) => {
+        if (!(currentMode === 'draw' || currentMode === 'strike')) return;
+        drawing = true;
+        currentStroke = { mode: currentMode, points: [getPoint(event)] };
+        canvas.setPointerCapture(event.pointerId);
+      });
+
+      canvas.addEventListener('pointermove', (event) => {
+        if (!drawing || !currentStroke) return;
+        currentStroke.points.push(getPoint(event));
+        const ctx = canvas.getContext('2d');
+        const pts = currentStroke.points;
+        if (pts.length >= 2) {
+          const a = pts[pts.length - 2];
+          const b = pts[pts.length - 1];
+          ctx.beginPath();
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.strokeStyle = '#171717';
+          ctx.lineWidth = currentMode === 'strike' ? 4 : 3;
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      });
+
+      const finishStroke = () => {
+        if (!drawing || !currentStroke) return;
+        drawing = false
+
+      };
+      const endStroke = () => {
+        if (!drawing || !currentStroke) return;
+        let strokes = [];
+        try { strokes = JSON.parse(state.todoInk || '[]'); } catch (e) {}
+        strokes.push(currentStroke);
+        state.todoInk = JSON.stringify(strokes);
+        saveAppState();
+        drawing = false;
+        currentStroke = null;
+      };
+
+      canvas.addEventListener('pointerup', endStroke);
+      canvas.addEventListener('pointercancel', endStroke);
+      canvas.addEventListener('pointerleave', () => {});
+
+      applyMode();
+
+      const notes = document.getElementById('notes');
+      notes.value = state.notes || '';
+      updateButton();
+      updateTodoButton();
+    }
+
+
+    function renderProductie() {
+      updateNav();
+      updateHeader();
+
+      const grid = document.getElementById('listGrid');
+      grid.innerHTML = '';
+      const state = getActiveState();
+      const board = document.createElement('div');
+      board.className = 'production-board';
+      const todayIdx = getTodayDayIndex();
+
+      state.productionSections.forEach((section, sectionIndex) => {
+        const visibleRows = section.rows.filter((row, rowIndex) => {
+          if (!state.todoOnly) return true;
+          const cell = getProductionCell(state, `${sectionIndex}-${rowIndex}-${todayIdx}`);
+          return !cell.stock;
+        });
+
+        if (state.todoOnly && !visibleRows.length) return;
+
+        const wrap = document.createElement('section');
+        wrap.className = 'production-section';
+
+        const title = document.createElement('div');
+        title.className = 'production-title';
+        title.textContent = section.title || ' ';
+        title.dataset.section = sectionIndex;
+        title.contentEditable = isEditing ? 'true' : 'false';
+        title.spellcheck = false;
+        title.addEventListener('input', onProductionTitleEdit);
+        wrap.appendChild(title);
+
+        if (isEditing) {
+          const editBar = document.createElement('div');
+          editBar.className = 'production-edit-bar';
+
+          const addRowBtn = document.createElement('button');
+          addRowBtn.type = 'button';
+          addRowBtn.className = 'mini-btn';
+          addRowBtn.textContent = '+ rij';
+          addRowBtn.addEventListener('click', () => addProductionRow(sectionIndex, section.rows.length - 1));
+
+          const addSectionBtn = document.createElement('button');
+          addSectionBtn.type = 'button';
+          addSectionBtn.className = 'mini-btn';
+          addSectionBtn.textContent = '+ kop';
+          addSectionBtn.addEventListener('click', () => addProductionSection(sectionIndex));
+
+          const removeSectionBtn = document.createElement('button');
+          removeSectionBtn.type = 'button';
+          removeSectionBtn.className = 'mini-btn danger-mini';
+          removeSectionBtn.textContent = '− kop';
+          removeSectionBtn.addEventListener('click', () => removeProductionSection(sectionIndex));
+
+          editBar.appendChild(addRowBtn);
+          editBar.appendChild(addSectionBtn);
+          editBar.appendChild(removeSectionBtn);
+          wrap.appendChild(editBar);
+        }
+
+        const tableWrap = document.createElement('div');
+        tableWrap.className = 'production-table-wrap';
+        const table = document.createElement('table');
+        table.className = 'production-table';
+
+        const thead = document.createElement('thead');
+        const headRow = document.createElement('tr');
+        ['MIN', 'MAX', 'Productie-item', ...PROD_DAYS].forEach((label, idx) => {
+          const th = document.createElement('th');
+          th.textContent = label;
+          if (idx === 2) th.classList.add('prod-item-head');
+          if (idx >= 3 && idx - 3 === todayIdx) th.classList.add('today-col');
+          headRow.appendChild(th);
+        });
+        if (isEditing) {
+          const th = document.createElement('th');
+          th.textContent = 'Bewerk';
+          headRow.appendChild(th);
+        }
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        visibleRows.forEach((row, rowIndexVisible) => {
+          const rowIndex = section.rows.indexOf(row);
+          const tr = document.createElement('tr');
+
+          const tdMin = document.createElement('td');
+          tdMin.className = 'prod-min';
+          tdMin.textContent = row.min || '';
+          tdMin.dataset.section = sectionIndex;
+          tdMin.dataset.row = rowIndex;
+          tdMin.dataset.field = 'min';
+          tdMin.contentEditable = isEditing ? 'true' : 'false';
+          tdMin.spellcheck = false;
+          tdMin.addEventListener('input', onProductionRowTextEdit);
+          tr.appendChild(tdMin);
+
+          const tdMax = document.createElement('td');
+          tdMax.className = 'prod-max';
+          tdMax.textContent = row.max || '';
+          tdMax.dataset.section = sectionIndex;
+          tdMax.dataset.row = rowIndex;
+          tdMax.dataset.field = 'max';
+          tdMax.contentEditable = isEditing ? 'true' : 'false';
+          tdMax.spellcheck = false;
+          tdMax.addEventListener('input', onProductionRowTextEdit);
+          tr.appendChild(tdMax);
+
+          const tdLabel = document.createElement('td');
+          tdLabel.className = 'prod-item-label';
+          tdLabel.textContent = row.label || '';
+          tdLabel.dataset.section = sectionIndex;
+          tdLabel.dataset.row = rowIndex;
+          tdLabel.dataset.field = 'label';
+          tdLabel.contentEditable = isEditing ? 'true' : 'false';
+          tdLabel.spellcheck = false;
+          tdLabel.addEventListener('input', onProductionRowTextEdit);
+          tr.appendChild(tdLabel);
+
+          PROD_DAYS.forEach((day, dayIndex) => {
+            const td = document.createElement('td');
+            td.className = 'prod-day-cell';
+            if (dayIndex === todayIdx) td.classList.add('today-col');
+            const key = `${sectionIndex}-${rowIndex}-${dayIndex}`;
+            td.dataset.key = key;
+            const cellState = getProductionCell(state, key);
+            td.textContent = cellState.value || (cellState.x ? 'X' : '');
+            if (cellState.value) td.classList.add('has-value');
+            if (cellState.stock) td.classList.add('stock-ok');
+            if (cellState.x) td.classList.add('has-x');
+            td.addEventListener('pointerdown', onProductionCellPointerDown);
+            td.addEventListener('pointerup', onProductionCellPointerUp);
+            td.addEventListener('pointerleave', onProductionCellPointerCancel);
+            td.addEventListener('pointercancel', onProductionCellPointerCancel);
+            tr.appendChild(td);
+          });
+
+          if (isEditing) {
+            const tdControls = document.createElement('td');
+            const controls = document.createElement('div');
+            controls.className = 'prod-row-controls';
+
+            const addBtn = document.createElement('button');
+            addBtn.type = 'button';
+            addBtn.className = 'mini-btn';
+            addBtn.textContent = '+';
+            addBtn.addEventListener('click', () => addProductionRow(sectionIndex, rowIndex));
+
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'mini-btn danger-mini';
+            removeBtn.textContent = '−';
+            removeBtn.addEventListener('click', () => removeProductionRow(sectionIndex, rowIndex));
+
+            controls.appendChild(addBtn);
+            controls.appendChild(removeBtn);
+            tdControls.appendChild(controls);
+            tr.appendChild(tdControls);
+          }
+
+          tbody.appendChild(tr);
+        });
+
+        table.appendChild(tbody);
+        tableWrap.appendChild(table);
+        wrap.appendChild(tableWrap);
+        board.appendChild(wrap);
+      });
+
+      grid.appendChild(board);
+
+      const helper = document.createElement('div');
+      helper.className = 'prod-helper';
+      helper.textContent = '';
+      grid.appendChild(helper);
+
+      const notes = document.getElementById('notes');
+      notes.value = state.notes || '';
+      updateButton();
+      updateTodoButton();
+    }
+
+
+    
     function render() {
+      if (activeListId === 'productie') {
+        renderProductie();
+        return;
+      }
+      if (activeListId === 'bestel') {
+        renderBestellijst();
+        return;
+      }
+      if (activeListId === 'todo') {
+        renderTodoLijst();
+        return;
+      }
+
       updateNav();
       updateHeader();
 
@@ -709,9 +2453,81 @@
           title.addEventListener('input', onTitleEdit);
           sectionEl.appendChild(title);
 
-          section.rows.forEach((rowLabel, rowIndex) => {
+          if (isEditing && activeListId !== 'bestel') {
+            const editBar = document.createElement('div');
+            editBar.className = 'section-edit-bar';
+
+            const addRowBtn = document.createElement('button');
+            addRowBtn.type = 'button';
+            addRowBtn.className = 'mini-btn';
+            addRowBtn.textContent = '+ rij';
+            addRowBtn.addEventListener('click', (event) => {
+              event.stopPropagation();
+              addGenericRow(colIndex, sectionIndex, section.rows.length - 1);
+            });
+
+            const addSectionBtn = document.createElement('button');
+            addSectionBtn.type = 'button';
+            addSectionBtn.className = 'mini-btn';
+            addSectionBtn.textContent = '+ kop';
+            addSectionBtn.addEventListener('click', (event) => {
+              event.stopPropagation();
+              addGenericSection(colIndex, sectionIndex);
+            });
+
+            const removeSectionBtn = document.createElement('button');
+            removeSectionBtn.type = 'button';
+            removeSectionBtn.className = 'mini-btn danger-mini';
+            removeSectionBtn.textContent = '− kop';
+            removeSectionBtn.addEventListener('click', (event) => {
+              event.stopPropagation();
+              removeGenericSection(colIndex, sectionIndex);
+            });
+
+            editBar.appendChild(addRowBtn);
+            editBar.appendChild(addSectionBtn);
+            editBar.appendChild(removeSectionBtn);
+            sectionEl.appendChild(editBar);
+          }
+
+          const sectionHasAnyObjects = section.rows.some(entry => typeof entry === 'object' && entry !== null);
+          if (sectionHasAnyObjects) {
+            const mmHead = document.createElement('div');
+            mmHead.className = 'koud-minmax-header';
+            ['MIN', 'MAX', 'Item', 'Status'].forEach(text => {
+              const cell = document.createElement('div');
+              cell.textContent = text;
+              mmHead.appendChild(cell);
+            });
+            sectionEl.appendChild(mmHead);
+          }
+
+          section.rows.forEach((rowEntry, rowIndex) => {
+            const rowLabel = typeof rowEntry === 'string' ? rowEntry : (rowEntry.label || '');
+            const rowMin = typeof rowEntry === 'object' ? (rowEntry.min || '') : '';
+            const rowMax = typeof rowEntry === 'object' ? (rowEntry.max || '') : '';
+
             const row = document.createElement('div');
             row.className = 'row';
+            if (sectionHasAnyObjects) row.classList.add('with-minmax');
+            const isNotesSection = /aantekening/i.test(section.title || '');
+            if (isNotesSection) row.classList.add('note-row');
+            const rowKey = `${colIndex}-${sectionIndex}-${rowIndex}`;
+            const isDone = isRowDone(state, rowKey);
+            if (state.todoOnly && isDone) return;
+            if (state.completed?.[rowKey]) row.classList.add('completed');
+
+            if (sectionHasAnyObjects) {
+              const minCell = document.createElement('div');
+              minCell.className = 'row-mm';
+              minCell.textContent = rowMin;
+              row.appendChild(minCell);
+
+              const maxCell = document.createElement('div');
+              maxCell.className = 'row-mm';
+              maxCell.textContent = rowMax;
+              row.appendChild(maxCell);
+            }
 
             const label = document.createElement('div');
             label.className = 'item-label';
@@ -723,9 +2539,12 @@
             label.contentEditable = isEditing ? 'true' : 'false';
             label.spellcheck = false;
             label.addEventListener('input', onLabelEdit);
+            label.addEventListener('click', onLabelToggleComplete);
+            label.addEventListener('touchend', onLabelTouchEnd, { passive: false });
 
             const valueCell = document.createElement('div');
             valueCell.className = 'value-cell';
+            if (isNotesSection) valueCell.classList.add('note-cell');
             valueCell.tabIndex = isEditing ? -1 : 0;
             valueCell.dataset.list = activeListId;
             valueCell.dataset.key = `${colIndex}-${sectionIndex}-${rowIndex}`;
@@ -737,20 +2556,49 @@
             valueCell.addEventListener('dblclick', onValueDoubleClick);
             valueCell.addEventListener('touchend', onValueTouchEnd, { passive: false });
 
+            if (isEditing && activeListId !== 'bestel') {
+              valueCell.innerHTML = '';
+              const controls = document.createElement('div');
+              controls.className = 'row-controls';
+
+              const addBtn = document.createElement('button');
+              addBtn.type = 'button';
+              addBtn.className = 'mini-btn';
+              addBtn.textContent = '+';
+              addBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                addGenericRow(colIndex, sectionIndex, rowIndex);
+              });
+
+              const removeBtn = document.createElement('button');
+              removeBtn.type = 'button';
+              removeBtn.className = 'mini-btn danger-mini';
+              removeBtn.textContent = '−';
+              removeBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                removeGenericRow(colIndex, sectionIndex, rowIndex);
+              });
+
+              controls.appendChild(addBtn);
+              controls.appendChild(removeBtn);
+              valueCell.appendChild(controls);
+            }
+
             row.appendChild(label);
             row.appendChild(valueCell);
             sectionEl.appendChild(row);
           });
 
-          columnEl.appendChild(sectionEl);
+          if (!state.todoOnly || sectionEl.querySelector('.row')) columnEl.appendChild(sectionEl);
         });
 
-        grid.appendChild(columnEl);
+        if (!state.todoOnly || columnEl.querySelector('.section')) grid.appendChild(columnEl);
       });
 
       const notes = document.getElementById('notes');
       notes.value = state.notes || '';
       updateButton();
+      updateTodoButton();
     }
 
     function switchList(nextId) {
@@ -850,6 +2698,23 @@
       }, 320);
     }
 
+    function onLabelToggleComplete(event) {
+      if (isEditing) return;
+      const el = event.currentTarget;
+      const { col, section, row } = el.dataset;
+      const key = `${col}-${section}-${row}`;
+      const state = getActiveState();
+      state.completed[key] = !state.completed[key];
+      saveAppState();
+      render();
+    }
+
+    function onLabelTouchEnd(event) {
+      if (isEditing) return;
+      event.preventDefault();
+      onLabelToggleComplete({ currentTarget: event.currentTarget });
+    }
+
     function onLabelEdit(event) {
       const state = getActiveState();
       const el = event.currentTarget;
@@ -869,11 +2734,20 @@
       saveAppState();
     });
 
+    document.getElementById('toggleTodoViewBtn').addEventListener('click', () => {
+      const state = getActiveState();
+      state.todoOnly = !state.todoOnly;
+      saveAppState();
+      render();
+    });
+
     document.getElementById('clearValuesBtn').addEventListener('click', () => {
       const sure = confirm('Alle invulvelden en notities wissen van deze lijst? De aangepaste lijsttekst blijft behouden.');
       if (!sure) return;
       const state = getActiveState();
       state.values = {};
+      state.completed = {};
+      state.productionCells = {};
       state.notes = '';
       saveAppState();
       render();
@@ -897,5 +2771,13 @@
     render();
   editToggle.addEventListener('touchend', onEditToggleTouchEnd, { passive: false });
 </script>
+
+  <div class="name-picker-overlay" id="namePickerOverlay">
+    <div class="name-picker" role="dialog" aria-modal="true" aria-labelledby="namePickerTitle">
+      <div class="name-picker-head" id="namePickerTitle">Kies naam</div>
+      <div class="name-picker-actions" id="namePickerActions"></div>
+    </div>
+  </div>
+
 </body>
 </html>
