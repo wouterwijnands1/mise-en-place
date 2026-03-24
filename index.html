@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Bomenpark lijsten</title>
   <style>
     :root {
@@ -526,6 +526,7 @@
     }
 
     .prod-day-cell {
+      -webkit-touch-callout: none;
       min-width: 0;
       width: 8%;
       font-weight: 700;
@@ -1465,8 +1466,8 @@ const koudDefaultData = {
       { id: 'warm', label: 'Warm M&P', title: 'Warm mise en place', hint: '1x tikken = X. 2x tikken = invoeren. Alles blijft bewaard op dit apparaat.', defaultData: warmDefaultData },
       { id: 'koud', label: 'Koud M&P', title: 'Koud M&P', hint: '1x tikken = X. 2x tikken = invoeren. Alles blijft bewaard op dit apparaat.', defaultData: koudDefaultData },
       { id: 'productie', label: 'Productielijst', title: 'Productielijst', hint: '1x tikken = arceren t/m die dag. 2x tikken = X. Ingedrukt houden = invoeren.', defaultData: productieDefaultData },
-      { id: 'bestel', label: 'Bestellijst', title: 'Bestellijst', hint: 'Bestellijst: 1x tikken = X. 2x tikken = kies naam.', defaultData: bestelDefaultData },
-      { id: 'todo', label: 'Te doen lijst', title: 'Te doen lijst', hint: 'selecteer text of stift functie voor een te-doenlijst', defaultData: todoDefaultData }
+      { id: 'bestel', label: 'Bestellijst', title: 'Bestellijst', hint: '1x tikken = X. 2x tikken = kies naam. Alles wissen blijft werken per weeklijst.', defaultData: bestelDefaultData },
+      { id: 'todo', label: 'Te doen lijst', title: 'Te doen lijst', hint: 'kies text of stift om een lijst te maken', defaultData: todoDefaultData }
     ];
 
     let appState = loadAppState();
@@ -1876,6 +1877,7 @@ function updateMetaBar() {
 
     function onProductionCellPointerDown(event) {
       if (isEditing) return;
+      event.preventDefault();
       const cell = event.currentTarget;
       cell._pressTriggered = false;
       clearTimeout(cell._pressTimer);
@@ -1887,6 +1889,7 @@ function updateMetaBar() {
 
     function onProductionCellPointerUp(event) {
       if (isEditing) return;
+      event.preventDefault();
       const cell = event.currentTarget;
       clearTimeout(cell._pressTimer);
 
@@ -1964,30 +1967,61 @@ function toggleBestelX(cellEl) {
   render();
 }
 
-function chooseBestelNaam(cellEl) {
-  const state = getActiveState();
-  const key = cellEl.dataset.key;
-  const current = getBestelCell(state, key).value || '';
-  const choice = window.prompt(
-    'Kies een naam: Bern, Twan, Ruben of Johan.\nLaat leeg om te wissen.',
-    current === 'X' ? '' : current
-  );
-  if (choice === null) return;
-  const cleaned = choice.trim();
-  if (!cleaned) {
-    setBestelCell(state, key, { value: '' });
-    saveAppState();
-    render();
-    return;
-  }
-  const match = BESTEL_NAMEN.find(name => name.toLowerCase() === cleaned.toLowerCase());
-  if (!match) {
-    window.alert('Kies één van deze namen: Bern, Twan, Ruben, Johan.');
-    return;
-  }
-  setBestelCell(state, key, { value: match });
+let activeBestelCellKey = null;
+
+function closeNamePicker() {
+  const overlay = document.getElementById('namePickerOverlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  activeBestelCellKey = null;
+}
+
+function selectBestelNaam(name) {
+  if (!activeBestelCellKey) return;
+  const state = appState.lists.bestel;
+  setBestelCell(state, activeBestelCellKey, { value: name });
   saveAppState();
+  closeNamePicker();
   render();
+}
+
+function clearBestelNaam() {
+  if (!activeBestelCellKey) return;
+  const state = appState.lists.bestel;
+  setBestelCell(state, activeBestelCellKey, { value: '' });
+  saveAppState();
+  closeNamePicker();
+  render();
+}
+
+function openNamePicker(cellEl) {
+  activeBestelCellKey = cellEl.dataset.key;
+  const overlay = document.getElementById('namePickerOverlay');
+  const actions = document.getElementById('namePickerActions');
+  if (!overlay || !actions) return;
+
+  actions.innerHTML = '';
+  BESTEL_NAMEN.forEach(name => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'name-picker-btn';
+    btn.textContent = name;
+    btn.addEventListener('click', () => selectBestelNaam(name));
+    actions.appendChild(btn);
+  });
+
+  const clearBtn = document.createElement('button');
+  clearBtn.type = 'button';
+  clearBtn.className = 'name-picker-btn clear';
+  clearBtn.textContent = 'Leegmaken';
+  clearBtn.addEventListener('click', clearBestelNaam);
+  actions.appendChild(clearBtn);
+
+  overlay.classList.add('open');
+}
+
+function chooseBestelNaam(cellEl) {
+  openNamePicker(cellEl);
 }
 
 function onBestelCellClick(event) {
@@ -1997,6 +2031,7 @@ function onBestelCellClick(event) {
 
 function onBestelCellDoubleClick(event) {
   if (isEditing) return;
+  event.preventDefault();
   chooseBestelNaam(event.currentTarget);
 }
 
@@ -2011,6 +2046,7 @@ function onBestelCellTouchEnd(event) {
     clearTimeout(cell._singleTapTimer);
     cell._singleTapTimer = null;
     cell.dataset.lastTap = '0';
+    event.preventDefault();
     openNamePicker(cell);
     return;
   }
@@ -2153,7 +2189,6 @@ function renderTodoLijst() {
       modeSelect.innerHTML = `
         <option value="text">Tekst</option>
         <option value="draw">Stift</option>
-
       `;
 
       const clearInkBtn = document.createElement('button');
@@ -2437,6 +2472,7 @@ function renderTodoLijst() {
             td.addEventListener('pointerup', onProductionCellPointerUp);
             td.addEventListener('pointerleave', onProductionCellPointerCancel);
             td.addEventListener('pointercancel', onProductionCellPointerCancel);
+            td.addEventListener('dblclick', (event) => event.preventDefault());
             tr.appendChild(td);
           });
 
@@ -2837,6 +2873,11 @@ document.getElementById('nameField').addEventListener('input', (event) => {
       state.values = {};
       state.completed = {};
       state.productionCells = {};
+      state.bestelCells = {};
+      state.todoText = '';
+      state.todoInk = '';
+      state.metaDate = '';
+      state.metaName = '';
       state.notes = '';
       saveAppState();
       render();
