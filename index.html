@@ -645,10 +645,21 @@
   padding: 8px 4px !important;
 }
 
+.bestel-day-cell.bestel-blocked {
+  background: #5a5a5a;
+  color: #f3f3f3;
+}
+
 .bestel-day-cell.has-x,
 .bestel-day-cell.has-name {
   background: linear-gradient(180deg, #f7efe4 0%, #efe1cf 100%);
   color: #111;
+}
+
+.bestel-day-cell.bestel-blocked.has-x,
+.bestel-day-cell.bestel-blocked.has-name {
+  background: linear-gradient(180deg, #7b7b7b 0%, #5a5a5a 100%);
+  color: #ffffff;
 }
 
 
@@ -902,156 +913,150 @@
     const LISTS_STORAGE_KEY = 'bomenpark_multi_lists_v2';
 
     const warmDefaultData = {
-      columns: [
+  columns: [
+    {
+      sections: [
         {
-          sections: [
-            {
-              title: '',
-              rows: [
-                { label: '1. checken van de reserveringen' },
-                { label: '2. rooster controleren' }
-              ]
-            },
-            {
-              title: 'Lunch klaarzetten',
-              rows: [
-                { label: 'soepen/sauzen' },
-                { label: 'eitjes bakken' },
-                { label: 'spek bakken' },
-                { label: 'kippendijen warm' },
-                { label: 'pulled pork warm' }
-              ]
-            },
-            {
-              title: 'Vlees',
-              rows: [
-                { label: 'varkenshaas' },
-                { label: 'lamsrack' },
-                { label: 'hamburgers grillen' }
-              ]
-            },
-            {
-              title: 'Vis',
-              rows: [
-                { label: 'zeebaars' },
-                { label: 'gamba' },
-                { label: 'tonijn grillen' }
-              ]
-            },
-            {
-              title: 'Groenten',
-              rows: [
-                { label: 'bieslook snijden' },
-                "l'amuse tomaatjes",
-                { label: 'uien bakken' },
-                { label: 'groenten' },
-                { label: 'bosui snijden' }
-              ]
-            },
-            {
-              title: 'Daglijst',
-              rows: [
-                { label: 'Vangst van de dag: 8.15' },
-                { label: 'Roast of the day: 5.15' },
-                { label: 'Lunch van de dag:' }
-              ]
-            },
-            {
-              title: 'Uithalen vriezer',
-              rows: [
-                { min: '4', max: '6', label: 'tomaten soep' },
-                { min: '2', max: '3', label: 'kreeften bisque' },
-                { min: '4', max: '5', label: 'seizoenssoep' },
-                { min: '8', max: '15', label: 'varkenswang' },
-                { label: 'lamsrack' },
-                { label: 'pulled pork' }
-              ]
-            }
+          title: '',
+          rows: [
+            { label: '1. checken van de reserveringen' },
+            { label: '2. rooster controleren' }
           ]
         },
         {
-          sections: [
-            {
-              title: '',
-              rows: [
-                { label: '3. koelcel nalopen' }
-              ]
-            },
-            {
-              title: 'Sauzen',
-              rows: [
-                { label: 'gerookte beurre blanc' },
-                { label: 'rode port' },
-                { label: 'bn- kalfsjus' },
-                { label: 'butter-chicken' },
-                { label: 'truffelroomsaus' },
-                { label: 'peper-cognac saus' },
-                { label: 'jdv afmaken' },
-                { label: 'old Amsterdam' }
-              ]
-            },
-            {
-              title: 'Overige',
-              rows: [
-                { label: 'room' },
-                { label: 'gamba snijden / garen' },
-                { label: 'pasta tagliatella' },
-                { label: 'appel caramel' },
-                { label: 'seizoenssoep garnituren' }
-              ]
-            },
-            {
-              title: 'Aanvullen',
-              rows: [
-                { label: 'paddenstoelen' },
-                { label: 'gerookte kipfilet' },
-                { label: 'sla melange' },
-                { label: 'tom/ komkommer' },
-                { label: 'appel-geit' },
-                { label: 'kerriemayonaise' },
-                { label: 'basilicumolie' },
-                { label: 'bramen' },
-                { label: 'krokante kip' },
-                { label: 'kalfsrendang' },
-                { label: 'chili,kokos,ui' }
-              ]
-            },
-            {
-              title: 'Aanvullen voor vriezer',
-              rows: [
-                { label: 'borrelgarnituur' },
-                { label: 'kaashapjes' },
-                { label: 'glutenvrij brood' },
-                { label: 'frikandellen' },
-                { label: 'risotto bitterballetjes' },
-                { label: 'garnalenbitterballen' },
-                { label: 'kreeftenboter' },
-                { label: 'poffertjes' }
-              ]
-            },
-            {
-              title: 'Saus:',
-              rows: [
-                { label: 'zzewolf' },
-                { label: 'diamanthaas' }
-              ]
-            },
-            {
-              title: 'Uithalen vriezer',
-              rows: [
-                { label: 'zoete aardappelcreme' },
-                { label: 'Iberico-truffel boter' },
-                { label: 'kippendijen' },
-                { label: 'bitterballen' },
-                { label: 'kroketten' }
-              ]
-            }
+          title: 'Lunch klaarzetten',
+          rows: [
+            { label: 'soepen/sauzen' },
+            { label: 'eitjes bakken' },
+            { label: 'spek bakken' },
+            { label: 'kippendijen warm' },
+            { label: 'pulled pork warm' }
+          ]
+        },
+        {
+          title: 'Vlees',
+          rows: [
+            { label: 'varkenshaas' },
+            { label: 'lamsrack' },
+            { label: 'hamburgers grillen' },
+            { label: 'lamsfilet' }
+          ]
+        },
+        {
+          title: 'Vis',
+          rows: [
+            { label: 'zeebaars' },
+            { label: 'gamba' },
+            { label: 'tonijn grillen' }
+          ]
+        },
+        {
+          title: 'Groenten',
+          rows: [
+            { label: 'bieslook snijden' },
+            { label: "l'amuse tomaatjes" },
+            { label: 'groenten' },
+            { label: 'bosui snijden' },
+            { label: 'limoen partjes' }
+          ]
+        },
+        {
+          title: 'Daglijst',
+          rows: [
+            { label: 'Vangst van de dag: 8.15' },
+            { label: 'Roast of the day: 5.15' },
+            { label: 'Lunch van de dag:' }
+          ]
+        },
+        {
+          title: 'Uithalen vriezer',
+          rows: [
+            { min: '4', max: '6', label: 'tomaten soep' },
+            { min: '2', max: '3', label: 'kreeften bisque' },
+            { min: '4', max: '5', label: 'seizoenssoep' },
+            { min: '8', max: '15', label: 'varkenswang' },
+            { label: 'lamsrack' },
+            { label: 'pulled pork' }
           ]
         }
-      ],
-      values: {},
-      notes: ''
-    };
+      ]
+    },
+    {
+      sections: [
+        {
+          title: '',
+          rows: [
+            { label: '3. koelcel nalopen' }
+          ]
+        },
+        {
+          title: 'Sauzen',
+          rows: [
+            { label: 'beurre noiset' },
+            { label: 'rode port' },
+            { label: 'bn- kalfsjus' },
+            { label: 'Caribbean ananas saus' },
+            { label: 'tomaten-paprika saus' },
+            { label: 'peper-cognac saus' },
+            { label: 'jdv afmaken' }
+          ]
+        },
+        {
+          title: 'Overige',
+          rows: [
+            { label: 'room' },
+            { label: 'gamba snijden / garen' },
+            { label: 'pasta tagliatella' },
+            { label: 'appel caramel' },
+            { label: 'seizoenssoep garnituren' }
+          ]
+        },
+        {
+          title: 'Aanvullen',
+          rows: [
+            { label: 'paddenstoelen' },
+            { label: 'gerookte kipfilet' },
+            { label: 'sla melange' },
+            { label: 'tom/ komkommer' },
+            { label: 'kerriemayonaise' },
+            { label: 'basilicumolie' },
+            { label: 'krokante kip' },
+            { label: 'Parmezaan' },
+            { label: 'krokante uitjes' },
+            { label: 'aanvullen voor vriezer' },
+            { label: 'borrelgarnituur' },
+            { label: 'kaashapjes' },
+            { label: 'glutenvrij brood' },
+            { label: 'frikandellen' },
+            { label: 'risotto bitterballetjes' },
+            { label: 'poffertjes' }
+          ]
+        },
+        {
+          title: 'Daglijst sauzen',
+          rows: [
+            { label: 'SAUS:' },
+            { label: 'SAUS:' }
+          ]
+        },
+        {
+          title: 'Uithalen vriezer',
+          rows: [
+            { label: 'zoete aardappelcreme' },
+            { label: 'Iberico-truffel boter' },
+            { label: 'kippendijen' },
+            { label: 'bitterballen' },
+            { label: 'kroketten' }
+          ]
+        }
+      ]
+    }
+  ],
+  values: {},
+  completed: {},
+  todoOnly: false,
+  notes: ''
+};
 
 const bestelDefaultData = {
   bestelSections: [
@@ -1088,329 +1093,208 @@ const todoDefaultData = {
 };
 
 const koudDefaultData = {
-      columns: [
+  columns: [
+    {
+      sections: [
         {
-          sections: [
-            {
-              title: '',
-              rows: [
-                { label: 'checken van de reserveringen' },
-                { label: 'grote koelcel nalopen' }
-              ]
-            },
-            {
-              title: 'Lunch klaarzetten',
-              rows: [
-                { label: 'brood afbakken' },
-                { min: '35', max: '50', label: 'carpaccio drieluik' },
-                { min: '10', max: '20', label: 'drieluik bouwen' },
-                { min: '20', max: '30', label: 'rijst spoelen/afkoken' },
-                { min: '20', max: '30', label: 'avocado schoonmaken' },
-                { min: '1', max: '3', label: 'zz kk bol/maan' },
-                { min: '1', max: '3', label: 'zz wortel/radijs' },
-                { min: '1', max: '2', label: 'rode ui ringen' },
-                { min: '1', max: '3', label: 'tomaat snijden' },
-                { min: '1', max: '3', label: 'komkommer snijden' },
-                { min: '8', max: '1', label: 'brie snijden etc.' },
-                { min: '8', max: '16', label: 'appel geitenkaas' },
-                { min: '1', max: '30', label: 'gerookte zalm afwegen' },
-                { min: '1', max: '2', label: 'krokante kappertjes' }
-              ]
-            },
-            {
-              title: 'Flesjes aanvullen',
-              rows: [
-                { min: '1', max: '2', label: 'huisdressing' },
-                { min: '1', max: '2', label: 'wasabi mayo' },
-                { min: '1', max: '2', label: 'truffel mayo' },
-                { min: '1', max: '1', label: 'tomaten mayo' },
-                { min: '1', max: '2', label: 'gekon citrusmayo' },
-                { min: '1', max: '1', label: 'jus van pad-truffel' },
-                { min: '1', max: '2', label: 'chili-creme fraiche' },
-                { min: '1', max: '1', label: 'karnemelk B-N' },
-                { min: '1', max: '1', label: 'gel-vijgen' },
-                { min: '1', max: '1', label: 'yuzu-gel' }
-              ]
-            },
-            {
-              title: 'Overig',
-              rows: [
-                { min: '1', max: '2', label: 'macadamia crumble' },
-                { min: '1', max: '1', label: 'rijstkrokantje' },
-                { min: '1', max: '1', label: 'bagel krokantje' }
-              ]
-            },
-            {
-              title: 'Aantekeningen',
-              rows: [
-                { label: 'Lunch van de dag:' },
-                { label: 'Drie luik/ Proeverij:' },
-                { label: 'Seizoensdessert:' }
-              ]
-            },
-            {
-              title: 'Uithalen vriezer',
-              rows: [
-                { label: 'Mani-taartje' },
-                { label: 'Ijstaartje' },
-                { label: 'wakame' },
-                { label: 'carpaccio 40.70' },
-                { label: 'tempuraparels' },
-                { label: 'edamame' },
-                { label: 'carpaccio drieluik 35.50' },
-                { label: 'tonijn' }
-              ]
-            },
-            {
-              title: 'Volgende dag',
-              rows: [
-                { label: 'Alles goed aanvullen voor de volgende dag!!' }
-              ]
-            }
+          title: '',
+          rows: [
+            { label: '1. checken van de reserveringen' },
+            { label: '2. grote koelcel nalopen' }
           ]
         },
         {
-          sections: [
-            {
-              title: '',
-              rows: [
-                { label: 'apparaten aanzetten' }
-              ]
-            },
-            {
-              title: 'Diner M&P',
-              rows: [
-                { min: '2', max: '3', label: 'soja parels' },
-                { min: '1', max: '2', label: 'radijs partjes snijden' },
-                { min: '1', max: '2', label: 'zz paars/geel wortel' },
-                { min: '6', max: '10', label: 'zalm (Bertje)' },
-                { min: '1', max: '2', label: 'crème zwarte knoflook' },
-                { min: '1', max: '1', label: 'Pata Negra crumble' },
-                { min: '1', max: '1', label: 'haringkuit spuitzak' },
-                { min: '1', max: '1', label: 'witlof karameliseren' },
-                { min: '1', max: '1', label: 'paling trancheren' },
-                { min: '1', max: '1', label: 'portobello roosteren/mar' },
-                { min: '1', max: '1', label: 'bieten garen etc.' },
-                { min: '1', max: '2', label: 'tartaar eend' },
-                { min: '1', max: '1', label: 'oester pipetjes etc.' }
-              ]
-            },
-            {
-              title: 'Desserts',
-              rows: [
-                { label: 'THT CHECKEN!!!!' },
-                { min: '7', max: '14', label: 'kaas plateau snijden' },
-                { min: '5', max: '16', label: 'creme brulee garen' },
-                { min: '2', max: '4', label: 'witte chocolade crème' },
-                { min: '1', max: '1', label: 'gel' },
-                { min: '1', max: '2', label: 'chocolade schotsen' },
-                { min: '1', max: '2', label: 'honeycomb' }
-              ]
-            },
-            {
-              title: 'Snijden',
-              rows: [
-                { min: '2', max: '4', label: 'tonijn tataki bak' },
-                { min: '1', max: '3', label: 'pata negra bak' },
-                { min: '20', max: '40', label: 'gezouten roomboter' }
-              ]
-            }
+          title: 'Lunch klaarzetten',
+          rows: [
+            { label: 'brood afbakken' },
+            { min: '35', max: '50', label: 'carpaccio drieluik' },
+            { min: '10', max: '20', label: 'drieluik bouwen' },
+            { min: '20', max: '30', label: 'rijst spoelen/afkoken' },
+            { min: '20', max: '30', label: 'avocado schoonmaken' },
+            { min: '1', max: '3', label: 'zz kk bol' },
+            { min: '1', max: '2', label: 'kk maan-rode ui' },
+            { min: '1', max: '3', label: 'zz gele wortel' },
+            { min: '1', max: '3', label: '(pittige) kool' },
+            { min: '1', max: '3', label: 'tomaat snijden' },
+            { min: '1', max: '30', label: 'gerookte zalm afwegen' }
+          ]
+        },
+        {
+          title: 'Flesjes aanvullen',
+          rows: [
+            { min: '1', max: '2', label: 'huisdressing' },
+            { min: '1', max: '2', label: 'wasabi mayo' },
+            { min: '1', max: '2', label: 'truffel mayo' },
+            { min: '1', max: '1', label: 'Sriracha mayo' },
+            { min: '1', max: '2', label: 'gekon citrusmayo' },
+            { min: '1', max: '1', label: 'ger beurre blanc + kuit' },
+            { min: '1', max: '2', label: 'chili-creme fraiche' },
+            { min: '1', max: '1', label: 'rendang-olie' },
+            { min: '1', max: '1', label: 'basilicum-olie' }
+          ]
+        },
+        {
+          title: 'Overig',
+          rows: [
+            { min: '1', max: '2', label: 'macadamia crumble' },
+            { min: '1', max: '1', label: 'bagel krokantje' }
+          ]
+        },
+        {
+          title: 'Aantekeningen',
+          rows: [
+            { label: 'Lunch van de dag:', note: true },
+            { label: 'Drie luik/ Proeverij:', note: true },
+            { label: 'Seizoensdessert:', note: true }
+          ]
+        },
+        {
+          title: 'Uithalen vriezer',
+          rows: [
+            { label: 'DESSERTS' },
+            { label: 'Alles goed aanvullen voor de volgende dag!!', note: true }
           ]
         }
-      ],
-      values: {},
-      completed: {},
-      todoOnly: false,
-      notes: ''
-    };
+      ]
+    },
+    {
+      sections: [
+        {
+          title: '',
+          rows: [
+            { label: '3. apparaten aanzetten' }
+          ]
+        },
+        {
+          title: 'Diner M&P',
+          rows: [
+            { min: '2', max: '3', label: 'soja parels' },
+            { min: '1', max: '2', label: 'radijs partjes snijden' },
+            { min: '1', max: '2', label: 'zz paars/geel wortel' },
+            { min: '6', max: '10', label: 'zalm (Bertje)' },
+            { min: '1', max: '2', label: 'crème zwarte knoflook' },
+            { min: '1', max: '1', label: 'schorseneren frituren' },
+            { min: '1', max: '1', label: 'spicy tomatenjam' },
+            { min: '1', max: '1', label: 'haringkuit spuitzak' },
+            { min: '1', max: '1', label: 'Coeur de boeuf marineren' },
+            { min: '1', max: '2', label: 'rundertartaar' },
+            { min: '1', max: '1', label: 'oester pipetjes etc.' }
+          ]
+        },
+        {
+          title: 'Desserts',
+          rows: [
+            { label: 'THT CHECKEN!!!!' },
+            { min: '7', max: '14', label: 'kaas plateau snijden' },
+            { min: '5', max: '16', label: 'creme brulee garen' },
+            { min: '2', max: '4', label: 'witte chocolade crème' },
+            { min: '1', max: '1', label: 'gel' },
+            { min: '1', max: '2', label: 'chocolade schotsen' },
+            { label: 'Gefeliciteerd borden' }
+          ]
+        },
+        {
+          title: 'Snijden',
+          rows: [
+            { min: '2', max: '4', label: 'tonijn tataki bak' },
+            { min: '1', max: '3', label: 'pata negra bak' },
+            { min: '20', max: '40', label: 'gezouten roomboter' }
+          ]
+        },
+        {
+          title: 'Uithalen vriezer',
+          rows: [
+            { label: 'Mani-taartje' },
+            { label: 'Ijstaartje' },
+            { label: 'wakame' },
+            { label: 'edamame' },
+            { min: '40', max: '70', label: 'carpaccio' },
+            { min: '35', max: '50', label: 'carpaccio drieluik' },
+            { label: 'tonijn' }
+          ]
+        },
+        {
+          title: 'Notitie',
+          rows: [
+            { label: 'Notitie', note: true }
+          ]
+        }
+      ]
+    }
+  ],
+  values: {},
+  completed: {},
+  todoOnly: false,
+  notes: ''
+};
 
     const productieDefaultData = {
-      productionSections: [
-        {
-                "title": "Sauzen/dressings",
-                "rows": [
-                        {
-                                "min": "1",
-                                "max": "3",
-                                "label": "Huisdressing"
-                        },
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Wasabi mayo"
-                        },
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Truffel mayo"
-                        },
-                        {
-                                "min": "1",
-                                "max": "3",
-                                "label": "Kerrie mayo"
-                        },
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Sriracha mayo"
-                        },
-                        {
-                                "min": "1",
-                                "max": "3",
-                                "label": "Gekonfijte citrusmayo"
-                        },
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Bomenpark-dipper"
-                        },
-                        {
-                                "min": "0.5",
-                                "max": "1",
-                                "label": "Basilicum olie (10 bossen)"
-                        },
-                        {
-                                "min": "1",
-                                "max": "1",
-                                "label": "Soja (parels)"
-                        }
-                ]
-        },
-        {
-                "title": "Ketel",
-                "rows": [
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Jus de veau opzetten"
-                        },
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Tomatensoep"
-                        },
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Kreeften Bisque"
-                        },
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Seizoensoep"
-                        }
-                ]
-        },
-        {
-                "title": "koude/warme kant",
-                "rows": [
-                        {
-                                "min": "0.5",
-                                "max": "2",
-                                "label": "Zoetzuur"
-                        },
-                        {
-                                "min": "2",
-                                "max": "3",
-                                "label": "Olijven marineren"
-                        },
-                        {
-                                "min": "1kg",
-                                "max": "3kg",
-                                "label": "Pijnboompitten bruneren"
-                        },
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Crème van zwarte knoflook"
-                        },
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Panna cotta aardappel-pinda"
-                        },
-                        {
-                                "min": "4",
-                                "max": "8",
-                                "label": "Groentenboter"
-                        }
-                ]
-        },
-        {
-                "title": "Desserts",
-                "rows": [
-                        {
-                                "min": "1",
-                                "max": "3",
-                                "label": "Creme brulee maken"
-                        },
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Witte chocolade massa"
-                        },
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Crumble"
-                        }
-                ]
-        },
-        {
-                "title": "vriezer",
-                "rows": [
-                        {
-                                "min": "1",
-                                "max": "4",
-                                "label": "Wangentjes"
-                        },
-                        {
-                                "min": "1",
-                                "max": "3",
-                                "label": "Risotto bitterbal"
-                        },
-                        {
-                                "min": "1",
-                                "max": "3",
-                                "label": "Pataboter"
-                        }
-                ]
-        },
-        {
-                "title": "Overig",
-                "rows": [
-                        {
-                                "min": "1",
-                                "max": "2",
-                                "label": "Borrelgarnituur"
-                        },
-                        {
-                                "min": "1",
-                                "max": "1",
-                                "label": "Kaashapjes"
-                        },
-                        {
-                                "min": "evt.",
-                                "max": "1",
-                                "label": "Risotto"
-                        }
-                ]
-        },
-        {
-                "title": "Notities",
-                "rows": [
-                        {
-                                "min": "",
-                                "max": "",
-                                "label": "Honeycomb 1x"
-                        }
-                ]
-        }
-],
-      productionCells: {},
-      todoOnly: false,
-      notes: ''
-    };
+  productionSections: [
+    {
+      title: 'Sauzen/dressings',
+      rows: [
+        { min: '1', max: '3', label: 'Huisdressing' },
+        { min: '1', max: '2', label: 'Wasabi mayo' },
+        { min: '1', max: '2', label: 'Truffel mayo' },
+        { min: '1', max: '3', label: 'Kerrie mayo' },
+        { min: '1', max: '2', label: 'Sriracha mayo' },
+        { min: '1', max: '3', label: 'Gekonfijte citrusmayo' },
+        { min: '1', max: '2', label: 'Bomenpark-dipper' },
+        { min: '0.5', max: '1', label: 'Basilicum olie (10 bossen)' },
+        { min: '1', max: '1', label: 'Soja (parels)' }
+      ]
+    },
+    {
+      title: 'Ketel',
+      rows: [
+        { min: '1', max: '2', label: 'Jus de veau opzetten' },
+        { min: '1', max: '2', label: 'Tomatensoep' },
+        { min: '1', max: '2', label: 'Kreeften Bisque' },
+        { min: '1', max: '2', label: 'Seizoensoep' }
+      ]
+    },
+    {
+      title: 'Koude/warme kant',
+      rows: [
+        { min: '0.5', max: '2', label: 'Zoetzuur' },
+        { min: '2', max: '3', label: 'Olijven marineren' },
+        { min: '1kg', max: '3kg', label: 'Pijnboompitten bruneren' },
+        { min: '1', max: '2', label: 'Crème van zwarte knoflook' },
+        { min: '1', max: '2', label: 'Panna cotta aardappel-pinda' },
+        { min: '4', max: '8', label: 'Groentenboter' }
+      ]
+    },
+    {
+      title: 'Desserts',
+      rows: [
+        { min: '1', max: '3', label: 'Creme brulee maken' },
+        { min: '1', max: '2', label: 'Witte chocolade massa' },
+        { min: '1', max: '2', label: 'Crumble' }
+      ]
+    },
+    {
+      title: 'Vriezer',
+      rows: [
+        { min: '1', max: '4', label: 'Wangentjes' },
+        { min: '1', max: '3', label: 'Risotto bitterbal' },
+        { min: '1', max: '3', label: 'Pataboter' }
+      ]
+    },
+    {
+      title: 'Overig',
+      rows: [
+        { min: '1', max: '2', label: 'Borrelgarnituur' },
+        { min: '1', max: '1', label: 'Kaashapjes' },
+        { min: 'evt.', max: '1', label: 'Risotto' }
+      ]
+    }
+  ],
+  productionDays: ['MA', 'DI', 'WO', 'DO', 'VR', 'ZA', 'ZO'],
+  productionCells: {},
+  metaDate: '',
+  metaName: '',
+  notes: ''
+};
 
     function createPlaceholderData(listName) {
       return {
@@ -1472,7 +1356,17 @@ const koudDefaultData = {
 
     let appState = loadAppState();
     let activeListId = appState.activeListId || 'warm';
+    const EDIT_CODE = '538403';
     let isEditing = false;
+
+    function requestEditAccess() {
+      const entered = window.prompt('Voer code in om de lijst te bewerken:');
+      if (entered !== EDIT_CODE) {
+        window.alert('Onjuiste code');
+        return false;
+      }
+      return true;
+    }
 
     function clone(data) {
       return JSON.parse(JSON.stringify(data));
@@ -1941,7 +1835,25 @@ function updateMetaBar() {
     
 const BESTEL_DAYS = ['MA', 'DI', 'WO', 'DO', 'VR', 'ZA', 'ZO'];
 const BESTEL_NAMEN = ['Bern', 'Twan', 'Ruben', 'Johan'];
+const BESTEL_GRIJS = {
+  'Sligro': ['DI', 'WO', 'ZA'],
+  'Lamers': ['ZA'],
+  'Heerkens': ['ZA'],
+  'BBQuality': ['MA', 'WO', 'VR', 'ZA'],
+  'Olphen': ['DI', 'WO', 'DO', 'VR', 'ZA'],
+  'G&B': ['DI', 'WO', 'VR', 'ZA'],
+  'Fromage': ['DI', 'WO', 'VR', 'ZA'],
+  'Droom': ['DI', 'WO', 'DO', 'VR', 'ZA'],
+  'Boma': ['DI', 'WO', 'DO', 'VR', 'ZA'],
+  'Otelli': ['DI', 'WO', 'DO', 'VR', 'ZA'],
+  'Lars': ['DI', 'WO', 'DO', 'VR', 'ZA'],
+  'Christian, keuken': ['DI', 'WO', 'VR', 'ZA'],
+  'Christian, bediening': ['ZA']
+};
 
+function isBestelGrijs(rowLabel, day) {
+  return (BESTEL_GRIJS[rowLabel] || []).includes(day);
+}
 function getBestelCell(state, key) {
   const raw = state.bestelCells?.[key];
   if (!raw) return { value: '' };
@@ -2125,12 +2037,19 @@ function renderBestellijst() {
       BESTEL_DAYS.forEach((day, dayIndex) => {
         const td = document.createElement('td');
         td.className = 'bestel-day-cell';
+
+        if (isBestelGrijs(row.label || '', day)) {
+          td.classList.add('bestel-blocked');
+        }
+
         const key = `${sectionIndex}-${rowIndex}-${dayIndex}`;
         td.dataset.key = key;
         const cellState = getBestelCell(state, key);
         td.textContent = cellState.value || '';
+
         if (cellState.value === 'X') td.classList.add('has-x');
         if (cellState.value && cellState.value !== 'X') td.classList.add('has-name');
+
         td.addEventListener('click', onBestelCellClick);
         td.addEventListener('dblclick', onBestelCellDoubleClick);
         td.addEventListener('touchend', onBestelCellTouchEnd, { passive: false });
@@ -2798,6 +2717,7 @@ function renderTodoLijst() {
         clearTimeout(btn._singleTapTimer);
         btn._singleTapTimer = null;
         btn.dataset.lastTap = '0';
+        if (!requestEditAccess()) return;
         isEditing = true;
         render();
         return;
@@ -2886,6 +2806,7 @@ document.getElementById('nameField').addEventListener('input', (event) => {
     const editToggle = document.getElementById('editToggle');
     editToggle.addEventListener('dblclick', () => {
       if (isEditing) return;
+      if (!requestEditAccess()) return;
       isEditing = true;
       render();
     });
