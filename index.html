@@ -1353,7 +1353,7 @@ const koudDefaultData = {
       { id: 'bestel', label: 'Bestellijst', title: 'Bestellijst', hint: '1x tikken = X. 2x tikken = kies naam. Alles wissen blijft werken per weeklijst.', defaultData: bestelDefaultData },
       { id: 'todo', label: 'Te doen lijst', title: 'Te doen lijst', hint: 'kies text of stift om een lijst te maken', defaultData: todoDefaultData }
     ];
-
+localStorage.removeItem(LISTS_STORAGE_KEY);
     let appState = loadAppState();
     let activeListId = appState.activeListId || 'warm';
     const EDIT_CODE = '538403';
